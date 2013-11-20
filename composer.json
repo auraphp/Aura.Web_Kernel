@@ -1,5 +1,5 @@
 {
-    "name": "aura/web_kernel",
+    "name": "aura/web-kernel",
     "type": "library",
     "description": "The kernel files for an Aura web project.",
     "keywords": ["web", "kernel"],
