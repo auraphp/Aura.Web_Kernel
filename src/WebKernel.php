@@ -65,7 +65,7 @@ class WebKernel extends ProjectKernel
             $this->dispatcher->__invoke($this->request->params->get());
         } catch (\Aura\Dispatcher\Exception\ObjectNotDefined $e) {
             $this->logger->debug(__METHOD__ . ' no controller');
-            $dispatcher->__invoke(array(
+            $this->dispatcher->__invoke(array(
                 'controller' => 'no_controller',
                 'request' => $this->request,
                 'response' => $this->response,
