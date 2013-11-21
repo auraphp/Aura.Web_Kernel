@@ -35,7 +35,7 @@ class WebKernel extends ProjectKernel
             ));
         }
 
-        $routes = $this->router->getLog();
+        $routes = $this->router->getDebug();
         if (! $routes) {
             $this->logger->debug(__METHOD__ . ' routing: no routes in router');
         } else {
