@@ -1,6 +1,8 @@
 <?php
 namespace Aura\Web_Kernel;
 
+use Aura\Project_Kernel\ProjectKernel;
+
 class WebKernel extends ProjectKernel
 {
     public function __invoke()
