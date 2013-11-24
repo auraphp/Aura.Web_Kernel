@@ -12,7 +12,11 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "aura/project-kernel": "dev-develop-2",
+        "aura/dispatcher" : "dev-develop-2",
+        "aura/router": "dev-develop-2",
+        "aura/web": "dev-develop-2"
     },
     "autoload": {
         "files": ["autoload.php"]
