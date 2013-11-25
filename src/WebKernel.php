@@ -41,11 +41,11 @@ class WebKernel extends ProjectKernel
         if (! $routes) {
             $this->logger->debug(__METHOD__ . ' no routes in router');
         } else {
-            foreach ($routes as $route) {
-                foreach ($route->debug as $message) {
-                    $name = $route->name
-                          ? $route->name
-                          : $this->request->method->get() . ' ' . $route->path;
+            foreach ($routes as $tried) {
+                foreach ($tried->debug as $message) {
+                    $name = $tried->name
+                          ? $tried->name
+                          : $this->request->method->get() . ' ' . $tried->path;
                     $message = __METHOD__ . " $name $message";
                     $this->logger->debug($message);
                 }
@@ -68,7 +68,7 @@ class WebKernel extends ProjectKernel
         $controller = $this->request->params->get('controller');
         
         $missing_controller = ! is_object($controller)
-                           && ! $this->dispatcher->hasObject('controller');
+                           && ! $this->dispatcher->hasObject($controller);
         if ($missing_controller) {
             $this->logger->debug(__METHOD__ . " missing controller '$controller'");
             $this->request->params['controller']  = 'aura.web_kernel.missing_controller';

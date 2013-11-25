@@ -41,7 +41,7 @@ $dispatcher->setObject(
 // the kernel caught an exception
 $dispatcher->setObject(
     'aura.web_kernel.caught_exception',
-    function ($exception) use ($request, $response) {
+    function (\Exception $exception) use ($request, $response) {
         $content = "Exception '" . get_class($exception) . "' thrown for "
                  . $request->method->get() . ' '
                  . $request->url->get(PHP_URL_PATH) . PHP_EOL . PHP_EOL
