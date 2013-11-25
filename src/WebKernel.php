@@ -66,7 +66,7 @@ class WebKernel extends ProjectKernel
     protected function requestDispatch()
     {
         $controller = $this->request->params->get('controller');
-        $missing_controller = is_string($controller)
+        $missing_controller = ! is_object($controller)
                            && ! $this->dispatcher->hasObject('controller');
         if ($missing_controller) {
             $this->logger->debug(__METHOD__ . " missing controller '$controller'");
