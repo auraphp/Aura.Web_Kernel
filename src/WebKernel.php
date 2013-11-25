@@ -21,44 +21,67 @@ class WebKernel extends ProjectKernel
     
     protected function request()
     {
-        $this->logger->debug(__METHOD__ . ' routing');
+        $this->requestRoute();
+        $this->requestDispatch();
+    }
+    
+    protected function requestRoute()
+    {
+        // get the http verb, the path, and the server vars
+        $verb = $this->request->method->get();
+        $path = $this->request->url->get(PHP_URL_PATH);
+        $server = $this->request->server->get();
         
-        $route = $this->router->match(
-            $this->request->url->get(PHP_URL_PATH),
-            $this->request->server->get()
-        );
+        // log that we're routing, and try to get a route
+        $this->logger->debug(__METHOD__ . " $verb $path");
+        $route = $this->router->match($path, $server);
         
-        if ($route) {
-            $this->request->params->set($route->params);
-        } else {
-            $this->logger->debug(__METHOD__ . ' routing: no route');
-            $this->request->params->set(array(
-                'controller' => 'no_route',
-            ));
-        }
-
+        // log the routes that were tried for matches
         $routes = $this->router->getDebug();
         if (! $routes) {
-            $this->logger->debug(__METHOD__ . ' routing: no routes in router');
+            $this->logger->debug(__METHOD__ . ' no routes in router');
         } else {
             foreach ($routes as $route) {
                 foreach ($route->debug as $message) {
                     $name = $route->name
                           ? $route->name
                           : $this->request->method->get() . ' ' . $route->path;
-                    $message = __METHOD__ . " routing: $name $message";
+                    $message = __METHOD__ . " $name $message";
                     $this->logger->debug($message);
                 }
             }
         }
         
+        // did we find a matching route?
+        if ($route) {
+            // yes, retain the route params
+            $this->request->params->set($route->params);
+        } else {
+            // no, log it and set a controller name
+            $this->logger->debug(__METHOD__ . ' missing route');
+            $this->request->params['controller'] = 'aura.web_kernel.missing_route';
+        }
+    }
+    
+    protected function requestDispatch()
+    {
+        $controller = $$this->request->params->get('controller');
+        $missing_controller = is_string($controller)
+                           && ! $this->dispatcher->hasObject('controller');
+        if ($missing_controller) {
+            $this->logger->debug(__METHOD__ . " missing controller '$controller'");
+            $this->request->params['controller']  = 'aura.web_kernel.missing_controller';
+            $this->request->params['missing_controller'] = $controller;
+        };
+        
         try {
-            $this->logger->debug(__METHOD__ . ' dispatch');
+            $this->logger->debug(__METHOD__ . " to '$controller'");
             $this->dispatcher->__invoke($this->request->params->get());
-        } catch (\Aura\Dispatcher\Exception\ObjectNotDefined $e) {
-            $this->logger->debug(__METHOD__ . ' dispatch: no controller');
+        } catch (Exception $e) {
+            $this->logger->debug(__METHOD__ . " caught exception " . get_class($e));
             $dispatcher->__invoke(array(
-                'controller' => 'no_controller',
+                'controller' => 'aura.web_kernel.caught_exception',
+                'exception' => $e,
             ));
         }
     }
