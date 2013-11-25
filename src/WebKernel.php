@@ -11,6 +11,7 @@
 namespace Aura\Web_Kernel;
 
 use Aura\Project_Kernel\ProjectKernel;
+use Exception;
 
 /**
  * 
