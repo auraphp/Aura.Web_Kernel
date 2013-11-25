@@ -66,6 +66,7 @@ class WebKernel extends ProjectKernel
     protected function requestDispatch()
     {
         $controller = $this->request->params->get('controller');
+        
         $missing_controller = ! is_object($controller)
                            && ! $this->dispatcher->hasObject('controller');
         if ($missing_controller) {
@@ -74,8 +75,15 @@ class WebKernel extends ProjectKernel
             $this->request->params['missing_controller'] = $controller;
         };
         
+        $message = __METHOD__ . ' to ';
+        if (is_object($controller)) {
+            $message .= 'object';
+        } else {
+            $message .= $controller;
+        }
+        $this->logger->debug($message);
+        
         try {
-            $this->logger->debug(__METHOD__ . " to '$controller'");
             $this->dispatcher->__invoke($this->request->params->get());
         } catch (Exception $e) {
             $this->logger->debug(__METHOD__ . " caught exception " . get_class($e));
