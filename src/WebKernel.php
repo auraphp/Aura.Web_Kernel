@@ -1,10 +1,33 @@
 <?php
+/**
+ * 
+ * This file is part of Aura for PHP.
+ * 
+ * @package Aura.Web_Kernel
+ * 
+ * @license http://opensource.org/licenses/bsd-license.php BSD
+ * 
+ */
 namespace Aura\Web_Kernel;
 
 use Aura\Project_Kernel\ProjectKernel;
 
+/**
+ * 
+ * A kernel for Aura web projects.
+ * 
+ * @package Aura.Web_Kernel
+ * 
+ */
 class WebKernel extends ProjectKernel
 {
+    /**
+     * 
+     * Invokes the kernel (i.e., runs it).
+     * 
+     * @return null
+     * 
+     */
     public function __invoke()
     {
         parent::__invoke();
@@ -19,12 +42,26 @@ class WebKernel extends ProjectKernel
         $this->response();
     }
     
+    /**
+     * 
+     * Handle the "request" portion of the invocation.
+     * 
+     * @return null
+     * 
+     */
     protected function request()
     {
         $this->requestRoute();
         $this->requestDispatch();
     }
     
+    /**
+     * 
+     * Handle the routing portion of the request.
+     * 
+     * @return null
+     * 
+     */
     protected function requestRoute()
     {
         // get the http verb, the path, and the server vars
@@ -63,6 +100,13 @@ class WebKernel extends ProjectKernel
         }
     }
     
+    /**
+     * 
+     * Handle the dispatch portion of the request.
+     * 
+     * @return null
+     * 
+     */
     protected function requestDispatch()
     {
         $controller = $this->request->params->get('controller');
@@ -94,6 +138,13 @@ class WebKernel extends ProjectKernel
         }
     }
     
+    /**
+     * 
+     * Send the response.
+     * 
+     * @return null
+     * 
+     */
     protected function response()
     {
         $this->logger->debug(__METHOD__);

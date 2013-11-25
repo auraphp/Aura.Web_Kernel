@@ -6,10 +6,11 @@ $dispatcher = $di->get('web_dispatcher');
 $request = $di->get('web_request');
 $response = $di->get('web_response');
 
+// use 'controller' and 'action' from the route params
 $dispatcher->setObjectParam('controller');
 $dispatcher->setMethodParam('action');
 
-// the url has no matching route
+// for when the url has no matching route
 $dispatcher->setObject(
     'aura.web_kernel.missing_route',
     function () use ($request, $response) {
@@ -23,7 +24,7 @@ $dispatcher->setObject(
     }
 );
 
-// the controller by the route was not found
+// for when the controller was not found
 $dispatcher->setObject(
     'aura.web_kernel.missing_controller',
     function ($missing_controller) use ($request, $response) {
@@ -38,7 +39,7 @@ $dispatcher->setObject(
     }
 );
 
-// the kernel caught an exception
+// for when the kernel has caught an exception
 $dispatcher->setObject(
     'aura.web_kernel.caught_exception',
     function (\Exception $exception) use ($request, $response) {
