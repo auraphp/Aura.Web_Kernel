@@ -107,7 +107,8 @@ class WebKernel extends ProjectKernel
         
         // send non-cookie headers
         foreach ($this->response->headers->get() as $label => $value) {
-            header($label, $value);
+            // the header() function itself prevents header injection attacks
+            header("$label: $value");
         }
         
         // send cookies
