@@ -13,10 +13,10 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "aura/project-kernel": "dev-develop-2",
-        "aura/dispatcher" : "dev-develop-2",
-        "aura/router": "dev-develop-2",
-        "aura/web": "dev-develop-2"
+        "aura/project-kernel": "2.*@dev",
+        "aura/dispatcher" : "2.*@dev",
+        "aura/router": "2.*@dev",
+        "aura/web": "2.*@dev"
     },
     "autoload": {
         "files": ["autoload.php"]
@@ -24,6 +24,9 @@
     "extra": {
         "aura": {
             "type": "kernel"
+        },
+        "branch-alias": {
+            "dev-develop-2": "2.0.x-dev"
         }
     }
 }
