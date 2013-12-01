@@ -54,3 +54,4 @@ class WebKernelResponder
         // send content, and done!
         echo $this->response->content->get();
     }
+}
