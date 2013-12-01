@@ -30,7 +30,7 @@ $di->params['Aura\Web_Kernel\WebKernelDispatcher'] = array(
  * Aura\Web_Kernel\WebKernelResponder
  */
 $di->params['Aura\Web_Kernel\WebKernelResponder'] = array(
-    'web_response' => $di->lazyGet('response'),
+    'response' => $di->lazyGet('web_response'),
     'logger' => $di->lazyGet('logger'),
 );
 
