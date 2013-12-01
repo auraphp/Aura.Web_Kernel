@@ -25,7 +25,11 @@ if (! $mode) {
 // composer autoloader
 $loader = require "{$base}/vendor/autoload.php";
 
-// create and invoke the project kernel to start the project running
-$factory = new WebKernelFactory;
-$kernel = $factory->newInstance($base, $mode, $loader);
-$kernel->__invoke();
+// project config
+$project_kernel_factory = new Aura\Project_Kernel\ProjectKernelFactory;
+$project_kernel = $project_kernel_factory->newInstance($base, $mode, $loader);
+$di = $project_kernel->__invoke();
+
+// run the web kernel
+$web_kernel = $di->get('web_kernel');
+$web_kernel->__invoke();
