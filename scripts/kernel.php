@@ -11,6 +11,8 @@
  */
 namespace Aura\Web_Kernel;
 
+use Aura\Project_Kernel\ProjectKernelFactory;
+
 // the project base directory, relative to
 // {$project}/vendor/aura/web_kernel/scripts/kernel.php
 $base = dirname(dirname(dirname(dirname(__DIR__))));
@@ -26,7 +28,7 @@ if (! $mode) {
 $loader = require "{$base}/vendor/autoload.php";
 
 // project config
-$project_kernel_factory = new Aura\Project_Kernel\ProjectKernelFactory;
+$project_kernel_factory = new ProjectKernelFactory;
 $project_kernel = $project_kernel_factory->newInstance($base, $mode, $loader);
 $di = $project_kernel->__invoke();
 
