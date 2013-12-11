@@ -49,7 +49,7 @@ class WebKernelDispatcher
             $this->dispatcher->__invoke($this->request->params->get());
         } catch (Exception $e) {
             $this->logger->debug(__METHOD__ . " caught exception " . get_class($e));
-            $dispatcher->__invoke(array(
+            $this->dispatcher->__invoke(array(
                 'controller' => 'aura.web_kernel.caught_exception',
                 'exception' => $e,
             ));
