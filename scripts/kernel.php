@@ -24,8 +24,9 @@ if (! $mode) {
     $mode = "default";
 }
 
-// composer autoloader
+// composer autoloader, add project src/ directory
 $loader = require "{$base}/vendor/autoload.php";
+$loader->add('', "{$base}/src");
 
 // project config
 $project_kernel_factory = new ProjectKernelFactory;
