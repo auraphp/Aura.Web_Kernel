@@ -1,6 +1,9 @@
 <?php
 namespace Aura\Web_Kernel;
 
+use Aura\Web\Request;
+use Aura\Web\Response;
+
 abstract class AbstractController
 {
     protected $request;
