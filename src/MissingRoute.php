@@ -3,7 +3,7 @@ namespace Aura\Web_Kernel;
 
 class MissingRoute extends AbstractController
 {
-    public function __invoke($missing_controller)
+    public function __invoke()
     {
         $content = 'No route for '
                  . $this->request->method->get() . ' '
