@@ -1,22 +1,10 @@
 <?php
 namespace Aura\Web_Kernel;
 
-use Aura\Web\Request;
-use Aura\Web\Response;
 use Exception;
 
-class CaughtException
+class CaughtException extends AbstractController
 {
-    protected $request;
-    
-    protected $response;
-    
-    public function __construct(Request $request, Response $response)
-    {
-        $this->request = $request;
-        $this->response = $response;
-    }
-    
     public function __invoke(Exception $exception)
     {
         $content = "Exception '" . get_class($exception) . "' thrown for "

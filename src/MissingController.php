@@ -1,22 +1,8 @@
 <?php
 namespace Aura\Web_Kernel;
 
-use Aura\Web\Request;
-use Aura\Web\Response;
-use Exception;
-
-class MissingController
+class MissingController extends AbstractController
 {
-    protected $request;
-    
-    protected $response;
-    
-    public function __construct(Request $request, Response $response)
-    {
-        $this->request = $request;
-        $this->response = $response;
-    }
-    
     public function __invoke($missing_controller)
     {
         $content = "Missing controller '$missing_controller' for "

@@ -9,6 +9,14 @@ $di->set('web_dispatcher', $di->lazyNew('Aura\Dispatcher\Dispatcher'));
 $di->set('web_kernel', $di->lazyNew('Aura\Web_Kernel\WebKernel'));
 
 /**
+ * Aura\Web_Kernel\AbstractController
+ */
+$di->params['Aura\Web_Kernel\AbstractController'] = array(
+    'request' => $di->lazyGet('web_request'),
+    'response' => $di->lazyGet('web_response'),
+);
+
+/**
  * Aura\Web_Kernel\WebKernel
  */
 $di->params['Aura\Web_Kernel\WebKernel'] = array(
