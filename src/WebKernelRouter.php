@@ -36,9 +36,8 @@ class WebKernelRouter
         if ($pos !== false) {
             // read the path after /index.php
             $path = substr($path, $pos + 10);
-            if (! $path) {
-                $path = '/';
-            }
+            // force a leading slash
+            $path = '/' . ltrim($path, '/');
         }
         
         // log that we're routing, and try to get a route
