@@ -6,6 +6,10 @@ use Monolog\Logger;
 
 class WebKernelResponder
 {
+    protected $response;
+    
+    protected $logger;
+    
     public function __construct(
         Response $response,
         Logger $logger
@@ -26,7 +30,7 @@ class WebKernelResponder
         $this->logger->debug(__METHOD__);
         
         // send the response status line
-        header(
+        $this->header(
             $this->response->status->get(),
             true,
             $this->response->status->getCode()
@@ -35,12 +39,12 @@ class WebKernelResponder
         // send non-cookie headers
         foreach ($this->response->headers->get() as $label => $value) {
             // the header() function itself prevents header injection attacks
-            header("$label: $value");
+            $this->header("$label: $value");
         }
         
         // send cookies
         foreach ($this->response->cookies->get() as $name => $cookie) {
-            setcookie(
+            $this->setcookie(
                 $name,
                 $cookie['value'],
                 $cookie['expire'],
@@ -53,5 +57,33 @@ class WebKernelResponder
         
         // send content, and done!
         echo $this->response->content->get();
+    }
+    
+    /**
+     * 
+     * Implemented so we can override it in testing.
+     * 
+     * @param string $string The header value to send.
+     * 
+     * @return null
+     * 
+     */
+    protected function header($string)
+    {
+        header($string);
+    }
+    
+    /**
+     * 
+     * Implemented so we can override it in testing.
+     * 
+     * @param string $string The header value to send.
+     * 
+     * @return null
+     * 
+     */
+    protected function setcookie($name, $value, $expire, $path, $domain, $secure, $httponly)
+    {
+        setcookie($name, $value, $expire, $path, $domain, $secure, $httponly);
     }
 }
