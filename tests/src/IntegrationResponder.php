@@ -12,7 +12,7 @@ class IntegrationResponder extends WebKernelResponder
         // retain output instead of echoing
         ob_start();
         parent::__invoke();
-        $this->content = ob_get_flush();
+        $this->content = ob_get_clean();
     }
     
     public function __get($key)
