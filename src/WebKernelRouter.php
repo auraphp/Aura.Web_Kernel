@@ -47,17 +47,13 @@ class WebKernelRouter
         
         // log the routes that were tried for matches
         $routes = $this->router->getDebug();
-        if (! $routes) {
-            $this->logger->debug(__METHOD__ . ' no routes in router');
-        } else {
-            foreach ($routes as $tried) {
-                foreach ($tried->debug as $message) {
-                    $name = $tried->name
-                          ? $tried->name
-                          : $this->request->method->get() . ' ' . $tried->path;
-                    $message = __METHOD__ . " $name $message";
-                    $this->logger->debug($message);
-                }
+        foreach ($routes as $tried) {
+            foreach ($tried->debug as $message) {
+                $name = $tried->name
+                      ? $tried->name
+                      : $this->request->method->get() . ' ' . $tried->path;
+                $message = __METHOD__ . " $name $message";
+                $this->logger->debug($message);
             }
         }
         
