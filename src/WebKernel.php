@@ -27,6 +27,11 @@ class WebKernel
         $this->responder  = $responder;
     }
     
+    public function __get($key)
+    {
+        return $this->$key;
+    }
+    
     /**
      * 
      * Invokes the kernel (i.e., runs it).
