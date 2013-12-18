@@ -5,6 +5,7 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
 {
     protected function exec()
     {
+        $_ENV['AURA_CONFIG_MODE'] = 'integration';
         require dirname(dirname(__DIR__)) . '/scripts/kernel.php';
         $this->web_kernel = $web_kernel;
     }
