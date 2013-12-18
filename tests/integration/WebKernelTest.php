@@ -17,7 +17,7 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
     public function testHelloWorld()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
-        $_SERVER['REQUEST_URI'] = '/';
+        $_SERVER['REQUEST_URI'] = '/aura/web-kernel/integration/hello';
         $this->exec();
         $expect = 'Hello World!';
         $actual = $this->web_kernel->responder->content;
@@ -27,7 +27,7 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
     public function testHelloWorldViaIndexPhp()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
-        $_SERVER['REQUEST_URI'] = '/index.php';
+        $_SERVER['REQUEST_URI'] = '/index.php/aura/web-kernel/integration/hello';
         $this->exec();
         $expect = 'Hello World!';
         $actual = $this->web_kernel->responder->content;
@@ -37,7 +37,7 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
     public function testMissingRoute()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
-        $_SERVER['REQUEST_URI'] = '/no-such-route';
+        $_SERVER['REQUEST_URI'] = '/aura/web-kernel/integration/missing-route';
         $this->exec();
         $expect = 'No route for GET /no-such-route';
         $actual = trim($this->web_kernel->responder->content);
