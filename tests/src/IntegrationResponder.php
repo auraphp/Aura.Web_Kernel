@@ -22,18 +22,12 @@ class IntegrationResponder extends WebKernelResponder
     
     protected function header($string)
     {
-        // for test coverage
-        parent::header(null);
-        
         // retain the string
         $this->headers[] = $string;
     }
     
     protected function setcookie($name, $value, $expire, $path, $domain, $secure, $httponly)
     {
-        // for test coverage
-        parent::setcookie(null, null, null, null, null, null, null);
-        
         // retain the cookie
         $this->cookies[] = array(
             'name'     => $name,

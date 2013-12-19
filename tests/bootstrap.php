@@ -7,10 +7,15 @@ error_reporting(E_ALL);
 $base = dirname(dirname(dirname(dirname(__DIR__))));
 $file = "{$base}/vendor/autoload.php";
 if (! is_readable($file)) {
-    echo "Did not find '{$file}'." . PHP_EOL;
-    echo "It looks like you are not in a Composer installation." . PHP_EOL;
-    exit(1);
+    $_ENV['AURA_TESTING_BASE_DIR'] = $base = dirname(__DIR__);
+    $file1 = "{$base}/vendor/autoload.php";
+    if (! is_readable($file1)) {
+        echo "Did not find '{$file}' or '{$file1}'." . PHP_EOL;
+        echo "It looks like you are not in a Composer installation." . PHP_EOL;
+        exit(1);
+    }
+    require "{$base}/autoload.php";
+    $file = $file1;
 }
-
 // include the composer autoloader
 require $file;
