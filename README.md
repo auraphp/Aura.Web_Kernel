@@ -5,8 +5,8 @@ independent use. It exists so it can be embedded in an [Aura.Web_Project][]
 created via Composer.  Please see the [Aura.Web_Project][] repository for
 more information.
 
-Because it is not an independent package, you cannot its integration tests
-directly. To run the tests:
+Because this is not an independent package, you cannot run its integration
+tests directly. To run the tests:
 
 1. Install [Aura.Web_Project][].
 
