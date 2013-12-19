@@ -12,7 +12,7 @@ Please see the [Aura.Web_Project][] repository for more information.
 
 ## Tests
 
-[![Build Status](https://travis-ci.org/auraphp/Aura.Autoload.png?branch=develop-2)](https://travis-ci.org/auraphp/Aura.Autoload)
+[![Build Status](https://travis-ci.org/auraphp/Aura.Web_Kernel.png?branch=develop-2)](https://travis-ci.org/auraphp/Aura.Autoload)
 
 This kernel has 100% code coverage with [PHPUnit][].
 
