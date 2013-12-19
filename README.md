@@ -4,7 +4,7 @@ Provides the core files for an [Aura.Web_Project][].
 
 ## Requirements
 
-This library requires PHP 5.4 or later. Unlike Aura library packages, this
+This kernel requires PHP 5.4 or later. Unlike Aura library packages, this
 kernel package is *not* intended for independent use. It exists so it can be
 embedded in an [Aura.Web_Project][] created via [Composer][].
 
