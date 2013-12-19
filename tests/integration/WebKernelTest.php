@@ -47,4 +47,33 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
         $actual = trim($this->web_kernel->responder->content);
         $this->assertSame($expect, $actual);
     }
+    
+    public function testMissingContoller()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_URI'] = '/aura/web-kernel/integration/missing-controller';
+        $this->exec();
+        $expect = <<<EXPECT
+Missing controller 'no-such-controller' for GET /aura/web-kernel/integration/missing-controller
+
+Params: array (
+  'controller' => 'aura.web_kernel.missing_controller',
+  'action' => NULL,
+  'missing_controller' => 'no-such-controller',
+)
+EXPECT;
+        $actual = trim($this->web_kernel->responder->content);
+        $this->assertSame($expect, $actual);
+    }
+    
+    public function testCaughtException()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_URI'] = '/aura/web-kernel/integration/throw-exception';
+        $this->exec();
+        $expect = "Exception 'Exception' thrown for GET /aura/web-kernel/integration/throw-exception";
+        $actual = explode(PHP_EOL, $this->web_kernel->responder->content);
+        // only check the first line
+        $this->assertSame($expect, $actual[0]);
+    }
 }
