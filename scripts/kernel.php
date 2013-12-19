@@ -10,9 +10,13 @@
  * 
  */
 namespace Aura\Web_Kernel;
-
 // get the project kernel
-$base = dirname(dirname(dirname(dirname(__DIR__))));
+if (isset($_ENV['AURA_TESTING_BASE_DIR'])) {
+    $base = $_ENV['AURA_TESTING_BASE_DIR'];
+} else {
+    $base = dirname(dirname(dirname(dirname(__DIR__))));
+}
+
 $project_kernel = require "{$base}/vendor/aura/project-kernel/scripts/kernel.php";
 
 // invoke it to get the DI container
