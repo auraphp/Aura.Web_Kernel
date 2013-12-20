@@ -2,10 +2,13 @@
 /**
  * Modify the DI container for integration testing.
  */
+$logger = $di->get('logger');
 $request = $di->get('web_request');
 $response = $di->get('web_response');
 $router = $di->get('web_router');
 
+$logger->pushHandler($di->newInstance('Monolog\Handler\NullHandler'));
+ 
 $router->add(null, '/aura/web-kernel/integration/hello')
     ->addValues(array(
         'controller' => function () use ($request, $response) {
