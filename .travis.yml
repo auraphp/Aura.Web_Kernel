@@ -4,7 +4,6 @@ php:
   - 5.5
   - hhvm
 before_script:
-  - composer global require 'phpunit/phpunit=3.7.*'
   - composer create-project aura/web-project --prefer-dist --stability=dev
   - rm -rf web-project/vendor/aura/web-kernel/*
   - cp -r autoload.php  web-project/vendor/aura/web-kernel/
@@ -15,4 +14,4 @@ before_script:
   - cp -r src           web-project/vendor/aura/web-kernel/
   - cp -r tests         web-project/vendor/aura/web-kernel/
   - cd web-project/vendor/aura/web-kernel/tests
-script: ~/.composer/vendor/bin/phpunit
+script: phpunit
