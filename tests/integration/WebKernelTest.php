@@ -58,7 +58,6 @@ Missing controller 'no-such-controller' for GET /aura/web-kernel/integration/mis
 
 Params: array (
   'controller' => 'aura.web_kernel.missing_controller',
-  'action' => NULL,
   'missing_controller' => 'no-such-controller',
 )
 EXPECT;
