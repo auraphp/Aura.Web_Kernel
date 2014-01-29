@@ -1,6 +1,8 @@
 <?php
 namespace Aura\Web_Kernel;
 
+use Aura\Project_Kernel\ProjectContainer;
+
 class WebKernelTest extends \PHPUnit_Framework_TestCase
 {
     protected $web_kernel;
@@ -12,10 +14,33 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
         
         // always have an HTTP_HOST or request uri won't get put together
         $_SERVER['HTTP_HOST'] = 'example.com';
-        require dirname(dirname(__DIR__)) . '/scripts/kernel.php';
         
         // retain from the kernel script
-        $this->web_kernel = $web_kernel;
+        $this->web_kernel = $this->index();
+    }
+    
+    // this should be an exact copy of the web/index.php file
+    protected function index()
+    {
+        // the project base directory
+        $base = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
+
+        // set up autoloader
+        $loader = require "$base/vendor/autoload.php";
+        $loader->add('', "{$base}/src");
+
+        // load environment modifications
+        require "{$base}/config/_env.php";
+
+        // create the project container
+        $di = ProjectContainer::factory($base, $loader, $_ENV, null);
+
+        // create and invoke a web kernel
+        $web_kernel = $di->newInstance('Aura\Web_Kernel\WebKernel');
+        $web_kernel();
+        
+        // done!
+        return $web_kernel;
     }
     
     public function testHelloWorld()
