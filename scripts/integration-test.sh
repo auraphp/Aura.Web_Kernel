@@ -17,4 +17,6 @@ cp -r src           web-project/vendor/aura/web-kernel/
 cp -r tests         web-project/vendor/aura/web-kernel/
 cd web-project/vendor/aura/web-kernel/tests
 phpunit
+status=$?
 cd ../../../..
+exit $status
