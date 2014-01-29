@@ -2,15 +2,5 @@ language: php
 php:
   - 5.4
   - 5.5
-before_script:
-  - composer create-project aura/web-project --prefer-dist --stability=dev
-  - rm -rf web-project/vendor/aura/web-kernel/*
-  - cp -r autoload.php  web-project/vendor/aura/web-kernel/
-  - cp -r composer.json web-project/vendor/aura/web-kernel/
-  - cp -r config        web-project/vendor/aura/web-kernel/
-  - cp -r README.md     web-project/vendor/aura/web-kernel/
-  - cp -r scripts       web-project/vendor/aura/web-kernel/
-  - cp -r src           web-project/vendor/aura/web-kernel/
-  - cp -r tests         web-project/vendor/aura/web-kernel/
-  - cd web-project/vendor/aura/web-kernel/tests
-script: phpunit
+  - hhvm
+script: php scripts/integration-test.sh
