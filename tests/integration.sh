@@ -13,7 +13,6 @@ cp -r autoload.php  web-project/vendor/aura/web-kernel/
 cp -r composer.json web-project/vendor/aura/web-kernel/
 cp -r config        web-project/vendor/aura/web-kernel/
 cp -r README.md     web-project/vendor/aura/web-kernel/
-cp -r scripts       web-project/vendor/aura/web-kernel/
 cp -r src           web-project/vendor/aura/web-kernel/
 cp -r tests         web-project/vendor/aura/web-kernel/
 cd web-project/vendor/aura/web-kernel/tests
