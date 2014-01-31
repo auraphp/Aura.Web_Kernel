@@ -27,7 +27,12 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
 
         // set up autoloader
         $loader = require "$base/vendor/autoload.php";
-        $loader->add('', "{$base}/src");
+        
+        // include the web kernel tests/src dir
+        $loader->addPsr4(
+            'Aura\\Web_Kernel\\',
+            "{$base}/vendor/aura/web-kernel/tests/src"
+        );
 
         // load environment modifications
         require "{$base}/config/_env.php";
