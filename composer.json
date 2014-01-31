@@ -19,7 +19,9 @@
         "aura/web": "2.*@dev"
     },
     "autoload": {
-        "files": ["autoload.php"]
+        "psr-4": {
+            "Aura\\Web_Kernel\\": "src/"
+        }
     },
     "extra": {
         "aura": {
