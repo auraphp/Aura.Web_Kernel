@@ -19,26 +19,18 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
         $this->web_kernel = $this->index();
     }
     
-    // this should be an exact copy of the web/index.php file
+    // equivalent to the web/index.php file
     protected function index()
     {
-        // the project base directory
-        $base = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
+        // run the project kernel
+        require dirname(dirname(dirname(dirname(dirname(__DIR__)))))
+              . '/vendor/aura/project-kernel/scripts/kernel.php';
 
-        // set up autoloader
-        $loader = require "$base/vendor/autoload.php";
-        
-        // include the web kernel tests/src dir
+        // include the vendor/aura/web-kernel/tests/src dir
         $loader->addPsr4(
             'Aura\\Web_Kernel\\',
             "{$base}/vendor/aura/web-kernel/tests/src"
         );
-
-        // load environment modifications
-        require "{$base}/config/_env.php";
-
-        // create the project container
-        $di = ProjectContainer::factory($base, $loader, $_ENV, null);
 
         // create and invoke a web kernel
         $web_kernel = $di->newInstance('Aura\Web_Kernel\WebKernel');
