@@ -1,3 +1,4 @@
+composer self-update
 if [ -d web-project ]
 then
     cd web-project
