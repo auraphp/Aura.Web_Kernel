@@ -14,5 +14,10 @@ abstract class AbstractController
     {
         $this->request = $request;
         $this->response = $response;
+        $this->init();
+    }
+    
+    protected function init()
+    {
     }
 }
