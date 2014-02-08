@@ -65,12 +65,20 @@ class WebKernelResponder
      * 
      * @param string $string The header value to send.
      * 
+     * @param bool $replace The header should replace a previous similar header
+     * 
+     * @param int $http_response_code Forces the HTTP response code to the specified value. 
+     * 
      * @return null
      * 
      */
-    protected function header($string)
+    protected function header($string, $replace = true, $http_response_code = '')
     {
-        header($string);
+        if ($http_response_code) {
+            header($string, $replace, $http_response_code);
+        } else {
+            header($string, $replace);
+        }
     }
     
     /**
