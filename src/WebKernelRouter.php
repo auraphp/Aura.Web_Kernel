@@ -3,67 +3,89 @@ namespace Aura\Web_Kernel;
 
 use Aura\Web\Request;
 use Aura\Router\Router;
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 
 class WebKernelRouter
 {
     public function __construct(
         Request $request,
         Router $router,
-        Logger $logger
+        LoggerInterface $logger = null
     ) {
         $this->request = $request;
         $this->router = $router;
         $this->logger = $logger;
     }
     
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    protected function log($level, $message, array $context = array())
+    {
+        if ($this->logger) {
+            $this->logger->log($level, $message, $context);
+        }
+    }
+    
     /**
      * 
-     * Route the request.
+     * Insert the route params into the request.
      * 
      * @return null
      * 
      */
     public function __invoke()
     {
-        // get the http verb, the path, and the server vars
-        $verb = $this->request->method->get();
+        $path = $this->getPath();
+        $route = $this->getRoute($path);
+        if ($route) {
+            $this->request->params->set($route->params);
+        } else {
+            $this->log(LogLevel::DEBUG, __CLASS__ . ' missing route');
+            $this->request->params['controller'] = 'aura.web_kernel.missing_route';
+        }
+    }
+
+    protected function getPath()
+    {
         $path = $this->request->url->get(PHP_URL_PATH);
-        $server = $this->request->server->get();
-        
-        // make an allowance for "index.php" in the path
+        return $this->removeScriptFromPath($path);
+    }
+
+    protected function removeScriptFromPath($path)
+    {
         $pos = strpos($path, '/index.php');
         if ($pos !== false) {
-            // read the path after /index.php
             $path = substr($path, $pos + 10);
-            // force a leading slash
             $path = '/' . ltrim($path, '/');
         }
-        
-        // log that we're routing, and try to get a route
-        $this->logger->debug(__METHOD__ . " $verb $path");
-        $route = $this->router->match($path, $server);
-        
-        // log the routes that were tried for matches
+        return $path;
+    }
+
+    protected function getRoute($path)
+    {
+        $verb = $this->request->method->get();
+        $this->log(LogLevel::DEBUG, __CLASS__ . " $verb $path");
+        $route = $this->router->match($path, $this->request->server->get());
+        $this->logRoutesTried();
+        return $route;
+    }
+
+    protected function logRoutesTried()
+    {
+        $verb = $this->request->method->get();
         $routes = $this->router->getDebug();
         foreach ($routes as $tried) {
             foreach ($tried->debug as $message) {
                 $name = $tried->name
                       ? $tried->name
-                      : $this->request->method->get() . ' ' . $tried->path;
-                $message = __METHOD__ . " $name $message";
-                $this->logger->debug($message);
+                      : $verb . ' ' . $tried->path;
+                $message = __CLASS__ . " $name $message";
+                $this->log(LogLevel::DEBUG, $message);
             }
-        }
-        
-        // did we find a matching route?
-        if ($route) {
-            // yes, retain the route params
-            $this->request->params->set($route->params);
-        } else {
-            // no, log it and set a controller name
-            $this->logger->debug(__METHOD__ . ' missing route');
-            $this->request->params['controller'] = 'aura.web_kernel.missing_route';
         }
     }
 }

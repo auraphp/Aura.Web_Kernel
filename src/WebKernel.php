@@ -20,6 +20,12 @@ namespace Aura\Web_Kernel;
  */
 class WebKernel
 {
+    protected $router;
+
+    protected $dispatcher;
+
+    protected $responder;
+    
     public function __construct($router, $dispatcher, $responder)
     {
         $this->router     = $router;

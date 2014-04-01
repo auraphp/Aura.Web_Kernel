@@ -16,16 +16,8 @@ Please see the [Aura.Web_Project][] repository for more information.
 
 This kernel has 100% code coverage with [PHPUnit][].
 
-The included tests are integration tests, not unit tests.  As such, they
-cannot be run (successfully) in the same way Aura library unit tests.
-
-- To run the tests **within an existing [Aura.Web_Project][]**, go to the
-  _vendor/aura/web-kernel/tests_ directory and issue `phpunit`.
-
-- To run the tests **while developing the kernel package**, go to the package
-  root directory and issue `./scripts/integration-test.sh`. This will create
-  or update an [Aura.Web_Project][] installation at the package root and run
-  the tests from within that project.
+The included tests are integration tests, not unit tests. To run them, change
+to the `tests/` directory and issue `.integration.sh`.
 
 ## PSR Compliance
 

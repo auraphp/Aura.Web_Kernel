@@ -2,7 +2,8 @@
 namespace Aura\Web_Kernel;
 
 use Aura\Web\Response;
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 
 class WebKernelResponder
 {
@@ -12,10 +13,22 @@ class WebKernelResponder
     
     public function __construct(
         Response $response,
-        Logger $logger
+        LoggerInterface $logger = null
     ) {
         $this->response = $response;
         $this->logger = $logger;
+    }
+    
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    protected function log($level, $message, array $context = array())
+    {
+        if ($this->logger) {
+            $this->logger->log($level, $message, $context);
+        }
     }
     
     /**
@@ -27,22 +40,31 @@ class WebKernelResponder
      */
     public function __invoke()
     {
-        $this->logger->debug(__METHOD__);
-        
-        // send the response status line
+        $this->log(LogLevel::DEBUG, __CLASS__);
+        $this->sendStatus();
+        $this->sendHeaders();
+        $this->sendCookies();
+        $this->sendContent();
+    }
+    
+    protected function sendStatus()
+    {
         $this->header(
             $this->response->status->get(),
             true,
             $this->response->status->getCode()
         );
-        
-        // send non-cookie headers
+    }
+
+    protected function sendHeaders()
+    {
         foreach ($this->response->headers->get() as $label => $value) {
-            // the header() function itself prevents header injection attacks
             $this->header("$label: $value");
         }
-        
-        // send cookies
+    }
+
+    protected function sendCookies()
+    {
         foreach ($this->response->cookies->get() as $name => $cookie) {
             $this->setcookie(
                 $name,
@@ -54,11 +76,13 @@ class WebKernelResponder
                 $cookie['httponly']
             );
         }
-        
-        // send content, and done!
+    }
+
+    protected function sendContent()
+    {
         echo $this->response->content->get();
     }
-    
+
     /**
      * 
      * Implemented so we can override it in testing.
@@ -77,13 +101,18 @@ class WebKernelResponder
      * 
      * Implemented so we can override it in testing.
      * 
-     * @param string $string The header value to send.
-     * 
      * @return null
      * 
      */
-    protected function setcookie($name, $value, $expire, $path, $domain, $secure, $httponly)
-    {
+    protected function setcookie(
+        $name,
+        $value,
+        $expire,
+        $path,
+        $domain,
+        $secure,
+        $httponly
+    ) {
         setcookie($name, $value, $expire, $path, $domain, $secure, $httponly);
     }
 }

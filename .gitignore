@@ -1,1 +1,3 @@
-web-project
+tests/integration/vendor
+tests/integration/composer.lock
+tests/integration/composer.json
