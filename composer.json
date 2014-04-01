@@ -20,12 +20,17 @@
     },
     "autoload": {
         "psr-4": {
-            "Aura\\Web_Kernel\\": "src/"
+            "Aura\\Web_Kernel\\": "src/",
+            "Aura\\Web_Kernel\\_Config\\": "config/"
         }
     },
     "extra": {
         "aura": {
-            "type": "kernel"
+            "type": "kernel",
+            "config": {
+                "common": "Aura\\Web_Kernel\\_Config\\Common",
+                "integration": "Aura\\Web_Kernel\\_Config\\Integration"
+            }
         },
         "branch-alias": {
             "dev-develop-2": "2.0.x-dev"
