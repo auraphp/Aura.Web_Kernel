@@ -1,7 +1,8 @@
-<phpunit bootstrap="./bootstrap.php" processIsolation="true">
+<phpunit bootstrap="./bootstrap.php">
     <testsuites>
         <testsuite>
             <directory>./integration</directory>
+            <exclude>./integration/vendor</exclude>
         </testsuite>
     </testsuites>
 </phpunit>

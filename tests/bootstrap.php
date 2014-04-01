@@ -1,16 +1,12 @@
 <?php
-// turn on all errors
 error_reporting(E_ALL);
 
-// look for a composer autoloader relative to
-// {$base}/vendor/aura/web-kernel/tests/bootstrap.php
-$base = dirname(dirname(dirname(dirname(__DIR__))));
-$file = "{$base}/vendor/autoload.php";
-if (! is_readable($file)) {
-    echo "Did not find '{$file}'." . PHP_EOL;
-    echo "It looks like you are not in a Composer installation." . PHP_EOL;
+$composer_autoload = __DIR__ . "/integration/vendor/autoload.php";
+if (! is_readable($composer_autoload)) {
+    echo "Did not find 'integration/vendor/autoload.php'." . PHP_EOL;
+    echo "Try ./integration.sh instead of phpunit." . PHP_EOL;
     exit(1);
 }
 
-// include the composer autoloader
-require $file;
+require $composer_autoload;
+require dirname(__DIR__) . '/autoload.php';
