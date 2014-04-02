@@ -8,15 +8,9 @@ class Integration extends Config
 {
     public function define(Container $di)
     {
-        $di->set('logger', $di->lazyNew('Aura\Web_Kernel\FakeLogger'));
-
         $di->params['Aura\Web_Kernel\WebKernel']['responder'] = $di->lazyNew(
             'Aura\Web_Kernel\IntegrationResponder'
         );
-
-        $di->setter['Aura\Web_Kernel\WebKernelDispatcher']['setLogger'] = $di->lazyGet('logger');
-        $di->setter['Aura\Web_Kernel\WebKernelResponder']['setLogger'] = $di->lazyGet('logger');
-        $di->setter['Aura\Web_Kernel\WebKernelRouter']['setLogger'] = $di->lazyGet('logger');
     }
 
     public function modify(Container $di)

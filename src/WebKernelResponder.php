@@ -3,7 +3,6 @@ namespace Aura\Web_Kernel;
 
 use Aura\Web\Response;
 use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
 
 class WebKernelResponder
 {
@@ -13,22 +12,10 @@ class WebKernelResponder
     
     public function __construct(
         Response $response,
-        LoggerInterface $logger = null
+        LoggerInterface $logger
     ) {
         $this->response = $response;
         $this->logger = $logger;
-    }
-    
-    public function setLogger(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
-    }
-
-    protected function log($level, $message, array $context = array())
-    {
-        if ($this->logger) {
-            $this->logger->log($level, $message, $context);
-        }
     }
     
     /**
@@ -40,7 +27,7 @@ class WebKernelResponder
      */
     public function __invoke()
     {
-        $this->log(LogLevel::DEBUG, __CLASS__);
+        $this->logger->debug(__CLASS__);
         $this->sendStatus();
         $this->sendHeaders();
         $this->sendCookies();

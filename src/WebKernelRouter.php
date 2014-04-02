@@ -4,30 +4,17 @@ namespace Aura\Web_Kernel;
 use Aura\Web\Request;
 use Aura\Router\Router;
 use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
 
 class WebKernelRouter
 {
     public function __construct(
         Request $request,
         Router $router,
-        LoggerInterface $logger = null
+        LoggerInterface $logger
     ) {
         $this->request = $request;
         $this->router = $router;
         $this->logger = $logger;
-    }
-    
-    public function setLogger(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
-    }
-
-    protected function log($level, $message, array $context = array())
-    {
-        if ($this->logger) {
-            $this->logger->log($level, $message, $context);
-        }
     }
     
     /**
@@ -44,7 +31,7 @@ class WebKernelRouter
         if ($route) {
             $this->request->params->set($route->params);
         } else {
-            $this->log(LogLevel::DEBUG, __CLASS__ . ' missing route');
+            $this->logger->debug(__CLASS__ . ' missing route');
             $this->request->params['controller'] = 'aura.web_kernel.missing_route';
         }
     }
@@ -68,7 +55,7 @@ class WebKernelRouter
     protected function getRoute($path)
     {
         $verb = $this->request->method->get();
-        $this->log(LogLevel::DEBUG, __CLASS__ . " $verb $path");
+        $this->logger->debug(__CLASS__ . " $verb $path");
         $route = $this->router->match($path, $this->request->server->get());
         $this->logRoutesTried();
         return $route;
@@ -84,7 +71,7 @@ class WebKernelRouter
                       ? $tried->name
                       : $verb . ' ' . $tried->path;
                 $message = __CLASS__ . " $name $message";
-                $this->log(LogLevel::DEBUG, $message);
+                $this->logger->debug($message);
             }
         }
     }

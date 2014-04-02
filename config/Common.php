@@ -30,18 +30,21 @@ class Common extends Config
         // Aura\Web_Kernel\WebKernelDispatcher
         $di->params['Aura\Web_Kernel\WebKernelDispatcher'] = array(
             'request' => $di->lazyGet('web_request'),
-            'dispatcher' => $di->lazyGet('web_dispatcher')
+            'dispatcher' => $di->lazyGet('web_dispatcher'),
+            'logger' => $di->lazyGet('logger'),
         );
 
         // Aura\Web_Kernel\WebKernelResponder
         $di->params['Aura\Web_Kernel\WebKernelResponder'] = array(
             'response' => $di->lazyGet('web_response'),
+            'logger' => $di->lazyGet('logger'),
         );
 
         // Aura\Web_Kernel\WebKernelRouter
         $di->params['Aura\Web_Kernel\WebKernelRouter'] = array(
             'request' => $di->lazyGet('web_request'),
-            'router' => $di->lazyGet('web_router')
+            'router' => $di->lazyGet('web_router'),
+            'logger' => $di->lazyGet('logger'),
         );
 
     }
