@@ -3,5 +3,5 @@ php:
   - 5.4
   - 5.5
 before_script:
-  - cd tests
-script: ./integration.sh
+  - cd tests/kernel
+script: ./phpunit.sh

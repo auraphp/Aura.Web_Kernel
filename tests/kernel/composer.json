@@ -30,7 +30,7 @@
             "type": "kernel",
             "config": {
                 "common": "Aura\\Web_Kernel\\_Config\\Common",
-                "integration": "Aura\\Web_Kernel\\_Config\\Integration"
+                "kernel": "Aura\\Web_Kernel\\_Config\\Kernel"
             }
         },
         "branch-alias": {
