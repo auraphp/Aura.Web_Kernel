@@ -16,8 +16,8 @@ Please see the [Aura.Web_Project][] repository for more information.
 
 This kernel has 100% code coverage with [PHPUnit][].
 
-The included tests are integration tests, not unit tests. To run them, change
-to the `tests/` directory and issue `.integration.sh`.
+The tests included in this package are integration tests, not unit tests. To
+run them, change to the `tests/kernel` directory and issue `./phpunit.sh`.
 
 ## PSR Compliance
 
