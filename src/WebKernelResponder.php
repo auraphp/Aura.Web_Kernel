@@ -46,7 +46,7 @@ class WebKernelResponder
     protected function sendHeaders()
     {
         foreach ($this->response->headers->get() as $label => $value) {
-            $this->header("$label: $value");
+            $this->header("$label: $value", false);
         }
     }
 
@@ -76,12 +76,23 @@ class WebKernelResponder
      * 
      * @param string $string The header value to send.
      * 
+     * @param bool $replace Replace previous header?
+     * 
+     * @param int $http_response_code Use this HTTP response code.
+     * 
      * @return null
      * 
      */
-    protected function header($string)
-    {
-        header($string);
+    protected function header(
+        $string,
+        $replace = true,
+        $http_response_code = null
+    ) {
+        if ($http_response_code) {
+            header($string, $replace, $http_response_code);
+        } else {
+            header($string, $replace);
+        }
     }
     
     /**

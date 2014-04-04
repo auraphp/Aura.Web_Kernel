@@ -20,8 +20,11 @@ class IntegrationResponder extends WebKernelResponder
         return $this->$key;
     }
     
-    protected function header($string)
-    {
+    protected function header(
+        $string,
+        $replace = true,
+        $http_response_code = null
+    ) {
         // for test coverage
         parent::header(null);
         

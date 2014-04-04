@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "aura/project-kernel": "dev-reduced",
+        "aura/project-kernel": "2.*@dev",
         "aura/dispatcher" : "2.*@dev",
         "aura/router": "2.*@dev",
         "aura/web": "2.*@dev",
