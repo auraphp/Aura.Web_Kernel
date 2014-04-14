@@ -1,10 +1,35 @@
 <?php
+/**
+ * 
+ * This file is part of Aura for PHP.
+ * 
+ * @package Aura.Web_Kernel
+ * 
+ * @license http://opensource.org/licenses/bsd-license.php BSD
+ * 
+ */
 namespace Aura\Web_Kernel;
 
 use Exception;
 
+/**
+ * 
+ * A controller for when the web kernel catches an exception.
+ * 
+ * @package Aura.Web_Kernel
+ * 
+ */
 class CaughtException extends AbstractController
 {
+    /**
+     * 
+     * Invokes the controller.
+     * 
+     * @param Exception $exception The exception caught by the web kernel.
+     * 
+     * @return null
+     * 
+     */
     public function __invoke(Exception $exception)
     {
         $content = "Exception '" . get_class($exception) . "' thrown for "

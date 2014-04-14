@@ -10,7 +10,6 @@
  */
 namespace Aura\Web_Kernel;
 
-
 /**
  * 
  * A kernel for Aura web projects.
@@ -20,19 +19,63 @@ namespace Aura\Web_Kernel;
  */
 class WebKernel
 {
+    /**
+     * 
+     * Web router logic.
+     * 
+     * @var WebKernelRouter
+     * 
+     */
     protected $router;
 
+    /**
+     * 
+     * Web dispatcher logic.
+     * 
+     * @var WebKernelDispatcher
+     * 
+     */
     protected $dispatcher;
 
+    /**
+     * 
+     * Web responder logic.
+     * 
+     * @var WebKernelResponder
+     * 
+     */
     protected $responder;
     
-    public function __construct($router, $dispatcher, $responder)
-    {
-        $this->router     = $router;
+    /**
+     * 
+     * Constructor.
+     * 
+     * @param WebKernelRouter $router Web router logic.
+     * 
+     * @param WebKernelDispatcher $dispatcher Web dispatcher logic.
+     * 
+     * @param WebKernelResponder $responder Web responder logic.
+     * 
+     */
+    public function __construct(
+        WebKernelRouter $router,
+        WebKernelDispatcher $dispatcher,
+        WebKernelResponder $responder
+    ) {
+        $this->router = $router;
         $this->dispatcher = $dispatcher;
-        $this->responder  = $responder;
+        $this->responder = $responder;
     }
     
+    /**
+     * 
+     * Magic get for read-only properties.
+     * 
+     * @param string $key The property name.
+     * 
+     * @return mixed The property.
+     * 
+     */
     public function __get($key)
     {
         return $this->$key;

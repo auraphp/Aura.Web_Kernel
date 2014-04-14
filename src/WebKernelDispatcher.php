@@ -1,4 +1,13 @@
 <?php
+/**
+ * 
+ * This file is part of Aura for PHP.
+ * 
+ * @package Aura.Web_Kernel
+ * 
+ * @license http://opensource.org/licenses/bsd-license.php BSD
+ * 
+ */
 namespace Aura\Web_Kernel;
 
 use Aura\Web\Request;
@@ -6,8 +15,21 @@ use Aura\Dispatcher\Dispatcher;
 use Exception;
 use Psr\Log\LoggerInterface;
 
+/**
+ * 
+ * Web dispatcher logic.
+ * 
+ * @package Aura.Web_Kernel
+ * 
+ */
 class WebKernelDispatcher
 {
+    protected $request;
+
+    protected $dispatcher;
+
+    protected $logger;
+    
     public function __construct(
         Request $request,
         Dispatcher $dispatcher,
