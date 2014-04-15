@@ -1,3 +1,2 @@
-tests/integration/vendor
-tests/integration/composer.lock
-tests/integration/composer.json
+tests/kernel/vendor
+tests/kernel/composer.lock
