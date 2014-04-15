@@ -2,8 +2,11 @@
     "name": "aura/web-kernel",
     "type": "library",
     "description": "The kernel files for an Aura web project.",
-    "keywords": ["web", "kernel"],
-    "homepage": "http://auraphp.com/package/Aura.Web_Kernel",
+    "keywords": [
+        "web",
+        "kernel"
+    ],
+    "homepage": "https://github.com/auraphp/Aura.Web_Kernel",
     "license": "BSD-2-Clause",
     "authors": [
         {
@@ -14,7 +17,7 @@
     "require": {
         "php": ">=5.4.0",
         "aura/project-kernel": "2.*@dev",
-        "aura/dispatcher" : "2.*@dev",
+        "aura/dispatcher": "2.*@dev",
         "aura/router": "2.*@dev",
         "aura/web": "2.*@dev",
         "psr/log": "1.*"
