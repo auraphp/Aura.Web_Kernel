@@ -17,19 +17,51 @@ use Psr\Log\LoggerInterface;
 
 /**
  * 
- * Web dispatcher logic.
+ * Web kernel dispatcher logic.
  * 
  * @package Aura.Web_Kernel
  * 
  */
 class WebKernelDispatcher
 {
+    /**
+     * 
+     * A web (not HTTP!) request object.
+     * 
+     * @var Request
+     * 
+     */
     protected $request;
 
+    /**
+     * 
+     * A web dispatcher.
+     * 
+     * @var Dispatcher
+     * 
+     */
     protected $dispatcher;
 
+    /**
+     * 
+     * A PSR-3 logger.
+     * 
+     * @var LoggerInterface
+     * 
+     */
     protected $logger;
     
+    /**
+     * 
+     * Constructor.
+     * 
+     * @param Request $request A web request object.
+     * 
+     * @param Dispatcher $dispatcher A web dispatcher.
+     * 
+     * @param LoggerInterface $logger A PSR-3 logger.
+     * 
+     */
     public function __construct(
         Request $request,
         Dispatcher $dispatcher,
@@ -42,7 +74,7 @@ class WebKernelDispatcher
     
     /**
      * 
-     * Dispatch the request.
+     * Dispatches the request.
      * 
      * @return null
      * 
@@ -53,12 +85,21 @@ class WebKernelDispatcher
         $this->logControllerValue($controller);
         $this->checkForMissingController($controller);
         try {
-            $this->dispatch();
+            $this->dispatcher->__invoke($this->request->params->get());
         } catch (Exception $e) {
             $this->caughtException($e);
         }
     }
 
+    /**
+     * 
+     * Logs the controller to be dispatched to.
+     * 
+     * @param mixed $controller The controller to be dispatched to.
+     * 
+     * @return null
+     * 
+     */
     protected function logControllerValue($controller)
     {
         $message = __METHOD__ . ' to ';
@@ -70,6 +111,15 @@ class WebKernelDispatcher
         $this->logger->debug($message);
     }
 
+    /**
+     * 
+     * Check for a missing controller.
+     * 
+     * @param mixed $controller The controller to be dispatched to.
+     * 
+     * @return null
+     * 
+     */
     protected function checkForMissingController($controller)
     {
         $exists = is_object($controller)
@@ -83,11 +133,15 @@ class WebKernelDispatcher
         $this->request->params['missing_controller'] = $controller;
     }
 
-    protected function dispatch()
-    {
-        $this->dispatcher->__invoke($this->request->params->get());
-    }
-
+    /**
+     * 
+     * Caught an exception while dispatching.
+     * 
+     * @param Exception $exception The caught exception.
+     * 
+     * @return null
+     * 
+     */
     protected function caughtException(Exception $e)
     {
         $this->logger->debug(__CLASS__ . " caught exception " . get_class($e));

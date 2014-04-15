@@ -14,14 +14,53 @@ use Aura\Web\Request;
 use Aura\Router\Router;
 use Psr\Log\LoggerInterface;
 
+/**
+ * 
+ * Web kernel router logic.
+ * 
+ * @package Aura.Web_Kernel
+ * 
+ */
 class WebKernelRouter
 {
+    /**
+     * 
+     * A web (not HTTP!) request object.
+     * 
+     * @var Request
+     * 
+     */
     protected $request;
     
+    /**
+     * 
+     * A web router.
+     * 
+     * @var Router
+     * 
+     */
     protected $router;
 
+    /**
+     * 
+     * A PSR-3 logger.
+     * 
+     * @var LoggerInterface
+     * 
+     */
     protected $logger;
 
+    /**
+     * 
+     * Constructor.
+     * 
+     * @param Request $request A web request object.
+     * 
+     * @param Router $router A web router.
+     * 
+     * @param LoggerInterface $logger A PSR-3 logger.
+     * 
+     */
     public function __construct(
         Request $request,
         Router $router,
@@ -34,7 +73,7 @@ class WebKernelRouter
     
     /**
      * 
-     * Insert the route params into the request.
+     * Determines the route and inserts the route params into the request.
      * 
      * @return null
      * 
@@ -51,12 +90,28 @@ class WebKernelRouter
         }
     }
 
+    /**
+     * 
+     * Gets the path from the URL.
+     * 
+     * @return string
+     * 
+     */
     protected function getPath()
     {
         $path = $this->request->url->get(PHP_URL_PATH);
         return $this->removeScriptFromPath($path);
     }
 
+    /**
+     * 
+     * Removes the bootstrap script (if any) from the URL path.
+     * 
+     * @param string $path The URL path.
+     * 
+     * @return string
+     * 
+     */
     protected function removeScriptFromPath($path)
     {
         $pos = strpos($path, '/index.php');
@@ -67,6 +122,15 @@ class WebKernelRouter
         return $path;
     }
 
+    /**
+     * 
+     * Given a URL path, gets a matching route from the router.
+     * 
+     * @param string $path The URL path.
+     * 
+     * @return string
+     * 
+     */
     protected function getRoute($path)
     {
         $verb = $this->request->method->get();
@@ -76,6 +140,13 @@ class WebKernelRouter
         return $route;
     }
 
+    /**
+     * 
+     * Logs the different routes tried by the router.
+     * 
+     * @return null
+     * 
+     */
     protected function logRoutesTried()
     {
         $verb = $this->request->method->get();

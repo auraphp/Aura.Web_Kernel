@@ -83,7 +83,7 @@ class WebKernel
     
     /**
      * 
-     * Invokes the kernel (i.e., runs it).
+     * Routes the request through the dispatcher and sends the response.
      * 
      * @return null
      * 

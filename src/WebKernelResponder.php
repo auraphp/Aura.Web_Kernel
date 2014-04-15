@@ -13,12 +13,42 @@ namespace Aura\Web_Kernel;
 use Aura\Web\Response;
 use Psr\Log\LoggerInterface;
 
+/**
+ * 
+ * Web kernel responder logic.
+ * 
+ * @package Aura.Web_Kernel
+ * 
+ */
 class WebKernelResponder
 {
+    /**
+     * 
+     * A web (not HTTP!) response object.
+     * 
+     * @var Request
+     * 
+     */
     protected $response;
     
+    /**
+     * 
+     * A PSR-3 logger.
+     * 
+     * @var LoggerInterface
+     * 
+     */
     protected $logger;
     
+    /**
+     * 
+     * Constructor.
+     * 
+     * @param Response $response A web response object.
+     * 
+     * @param LoggerInterface $logger A PSR-3 logger.
+     * 
+     */
     public function __construct(
         Response $response,
         LoggerInterface $logger
@@ -29,7 +59,7 @@ class WebKernelResponder
     
     /**
      * 
-     * Send the response.
+     * Sends the response.
      * 
      * @return null
      * 
@@ -43,6 +73,13 @@ class WebKernelResponder
         $this->sendContent();
     }
     
+    /**
+     * 
+     * Sends the HTTP status.
+     * 
+     * @return null
+     * 
+     */
     protected function sendStatus()
     {
         $this->header(
@@ -52,6 +89,13 @@ class WebKernelResponder
         );
     }
 
+    /**
+     * 
+     * Sends the HTTP non-cookie headers.
+     * 
+     * @return null
+     * 
+     */
     protected function sendHeaders()
     {
         foreach ($this->response->headers->get() as $label => $value) {
@@ -59,6 +103,13 @@ class WebKernelResponder
         }
     }
 
+    /**
+     * 
+     * Sends the HTTP cookie headers.
+     * 
+     * @return null
+     * 
+     */
     protected function sendCookies()
     {
         foreach ($this->response->cookies->get() as $name => $cookie) {
@@ -74,6 +125,13 @@ class WebKernelResponder
         }
     }
 
+    /**
+     * 
+     * Sends the HTTP body.
+     * 
+     * @return null
+     * 
+     */
     protected function sendContent()
     {
         echo $this->response->content->get();
@@ -108,6 +166,25 @@ class WebKernelResponder
      * 
      * Implemented so we can override it in testing.
      * 
+     * @param string $name The name of the cookie.
+     * 
+     * @param string $value The value of the cookie.
+     * 
+     * @param int|string $expire The Unix timestamp after which the cookie
+     * expires.  If non-numeric, the method uses strtotime() on the value.
+     * 
+     * @param string $path The path on the server in which the cookie will be
+     * available on.
+     * 
+     * @param string $domain The domain that the cookie is available on.
+     * 
+     * @param bool $secure Indicates that the cookie should only be
+     * transmitted over a secure HTTPS connection.
+     * 
+     * @param bool $httponly When true, the cookie will be made accessible
+     * only through the HTTP protocol. This means that the cookie won't be
+     * accessible by scripting languages, such as JavaScript.
+    * 
      * @return null
      * 
      */
