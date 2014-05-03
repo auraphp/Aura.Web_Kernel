@@ -106,7 +106,7 @@ class WebKernel
                 throw new \Exception("Response content must be a string");
             }
             $this->responder->getResponse()->content->set($content);
-            $this->responder->getResponse->content->setType(
+            $this->responder->getResponse()->content->setType(
                 $media->available->getValue()
             );
         }
