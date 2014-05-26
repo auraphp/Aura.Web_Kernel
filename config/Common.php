@@ -30,7 +30,7 @@ class Common extends Config
         $di->params['Aura\Web_Kernel\WebKernel'] = array(
             'router' => $di->lazyNew('Aura\Web_Kernel\WebKernelRouter'),
             'dispatcher' => $di->lazyNew('Aura\Web_Kernel\WebKernelDispatcher'),
-            'responder' => $di->lazyNew('Aura\Web_Kernel\WebKernelResponder'),
+            'response_sender' => $di->lazyNew('Aura\Web\ResponseSender'),
         );
 
         // Aura\Web_Kernel\WebKernelDispatcher
