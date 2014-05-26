@@ -10,3 +10,6 @@ if (! is_readable($composer_autoload)) {
 
 require $composer_autoload;
 require dirname(dirname(__DIR__)) . '/autoload.php';
+
+// need the fake response sender from the Aura.Web tests
+require __DIR__ . "/vendor/aura/web/tests/src/FakeResponseSender.php";

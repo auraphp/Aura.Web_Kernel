@@ -8,8 +8,8 @@ class Kernel extends Config
 {
     public function define(Container $di)
     {
-        $di->params['Aura\Web_Kernel\WebKernel']['responder'] = $di->lazyNew(
-            'Aura\Web_Kernel\IntegrationResponder'
+        $di->params['Aura\Web_Kernel\WebKernel']['response_sender'] = $di->lazyNew(
+            'Aura\Web\FakeResponseSender'
         );
     }
 

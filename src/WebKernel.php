@@ -10,6 +10,8 @@
  */
 namespace Aura\Web_Kernel;
 
+use Aura\Web\ResponseSender;
+
 /**
  * 
  * A kernel for Aura web projects.
@@ -39,12 +41,12 @@ class WebKernel
 
     /**
      * 
-     * Web responder logic.
+     * Web response-sending logic.
      * 
-     * @var WebKernelResponder
+     * @var ResponseSender
      * 
      */
-    protected $responder;
+    protected $response_sender;
     
     /**
      * 
@@ -54,17 +56,17 @@ class WebKernel
      * 
      * @param WebKernelDispatcher $dispatcher Web dispatcher logic.
      * 
-     * @param WebKernelResponder $responder Web responder logic.
+     * @param ResponseSender $response_sender Web responder logic.
      * 
      */
     public function __construct(
         WebKernelRouter $router,
         WebKernelDispatcher $dispatcher,
-        WebKernelResponder $responder
+        ResponseSender $response_sender
     ) {
         $this->router = $router;
         $this->dispatcher = $dispatcher;
-        $this->responder = $responder;
+        $this->response_sender = $response_sender;
     }
     
     /**
@@ -92,6 +94,6 @@ class WebKernel
     {
         $this->router->__invoke();
         $this->dispatcher->__invoke();
-        $this->responder->__invoke();
+        $this->response_sender->__invoke();
     }
 }

@@ -11,8 +11,14 @@ class Common extends Config
         // services
         $di->set('web_request', $di->lazyNew('Aura\Web\Request'));
         $di->set('web_response', $di->lazyNew('Aura\Web\Response'));
+        $di->set('web_response_sender', $di->lazyNew('Aura\Web\ResponseSender'));
         $di->set('web_router', $di->lazyNew('Aura\Router\Router'));
         $di->set('web_dispatcher', $di->lazyNew('Aura\Dispatcher\Dispatcher'));
+
+        // Aura\Web\ResponseSender
+        $di->params['Aura\Web\ResponseSender'] = array(
+            'response' => $di->lazyGet('web_response'),
+        );
 
         // Aura\Web_Kernel\AbstractController
         $di->params['Aura\Web_Kernel\AbstractController'] = array(
@@ -31,12 +37,6 @@ class Common extends Config
         $di->params['Aura\Web_Kernel\WebKernelDispatcher'] = array(
             'request' => $di->lazyGet('web_request'),
             'dispatcher' => $di->lazyGet('web_dispatcher'),
-            'logger' => $di->lazyGet('logger'),
-        );
-
-        // Aura\Web_Kernel\WebKernelResponder
-        $di->params['Aura\Web_Kernel\WebKernelResponder'] = array(
-            'response' => $di->lazyGet('web_response'),
             'logger' => $di->lazyGet('logger'),
         );
 

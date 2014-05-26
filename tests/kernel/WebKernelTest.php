@@ -2,9 +2,15 @@
 namespace Aura\Web_Kernel;
 
 use Aura\Project_Kernel\Factory;
+use Aura\Web\FakeResponseSender;
 
 class WebKernelTest extends \PHPUnit_Framework_TestCase
 {
+    protected function setUp()
+    {
+        FakeResponseSender::reset();
+    }
+    
     // equivalent to the web/index.php file
     protected function index()
     {
@@ -31,7 +37,7 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
         $web_kernel = $this->index();
         
         $expect = 'Hello World!';
-        $actual = $web_kernel->responder->content;
+        $actual = FakeResponseSender::$content;
         $this->assertSame($expect, $actual);
     }
     
@@ -42,7 +48,7 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
         $web_kernel = $this->index();
         
         $expect = 'Hello World!';
-        $actual = $web_kernel->responder->content;
+        $actual = FakeResponseSender::$content;
         $this->assertSame($expect, $actual);
     }
     
@@ -53,7 +59,7 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
         $web_kernel = $this->index();
         
         $expect = 'No route for GET /aura/web-kernel/integration/missing-route';
-        $actual = trim($web_kernel->responder->content);
+        $actual = trim(FakeResponseSender::$content);
         $this->assertSame($expect, $actual);
     }
     
@@ -71,7 +77,7 @@ Params: array (
   'missing_controller' => 'no-such-controller',
 )
 EXPECT;
-        $actual = trim($web_kernel->responder->content);
+        $actual = trim(FakeResponseSender::$content);
         $this->assertSame($expect, $actual);
     }
     
@@ -82,7 +88,7 @@ EXPECT;
         $web_kernel = $this->index();
         
         $expect = "Exception 'Exception' thrown for GET /aura/web-kernel/integration/throw-exception";
-        $actual = explode(PHP_EOL, $web_kernel->responder->content);
+        $actual = explode(PHP_EOL, FakeResponseSender::$content);
         // only check the first line
         $this->assertSame($expect, $actual[0]);
     }
