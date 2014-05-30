@@ -1,12 +1,12 @@
 <?php
 /**
- * 
+ *
  * This file is part of Aura for PHP.
- * 
+ *
  * @package Aura.Web_Kernel
- * 
+ *
  * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
  */
 namespace Aura\Web_Kernel;
 
@@ -16,51 +16,51 @@ use Exception;
 use Psr\Log\LoggerInterface;
 
 /**
- * 
+ *
  * Web kernel dispatcher logic.
- * 
+ *
  * @package Aura.Web_Kernel
- * 
+ *
  */
 class WebKernelDispatcher
 {
     /**
-     * 
+     *
      * A web (not HTTP!) request object.
-     * 
+     *
      * @var Request
-     * 
+     *
      */
     protected $request;
 
     /**
-     * 
+     *
      * A web dispatcher.
-     * 
+     *
      * @var Dispatcher
-     * 
+     *
      */
     protected $dispatcher;
 
     /**
-     * 
+     *
      * A PSR-3 logger.
-     * 
+     *
      * @var LoggerInterface
-     * 
+     *
      */
     protected $logger;
-    
+
     /**
-     * 
+     *
      * Constructor.
-     * 
+     *
      * @param Request $request A web request object.
-     * 
+     *
      * @param Dispatcher $dispatcher A web dispatcher.
-     * 
+     *
      * @param LoggerInterface $logger A PSR-3 logger.
-     * 
+     *
      */
     public function __construct(
         Request $request,
@@ -71,13 +71,13 @@ class WebKernelDispatcher
         $this->dispatcher = $dispatcher;
         $this->logger = $logger;
     }
-    
+
     /**
-     * 
+     *
      * Dispatches the request.
-     * 
+     *
      * @return null
-     * 
+     *
      */
     public function __invoke()
     {
@@ -92,13 +92,13 @@ class WebKernelDispatcher
     }
 
     /**
-     * 
+     *
      * Logs the controller to be dispatched to.
-     * 
+     *
      * @param mixed $controller The controller to be dispatched to.
-     * 
+     *
      * @return null
-     * 
+     *
      */
     protected function logControllerValue($controller)
     {
@@ -112,13 +112,13 @@ class WebKernelDispatcher
     }
 
     /**
-     * 
+     *
      * Check for a missing controller.
-     * 
+     *
      * @param mixed $controller The controller to be dispatched to.
-     * 
+     *
      * @return null
-     * 
+     *
      */
     protected function checkForMissingController($controller)
     {
@@ -134,13 +134,13 @@ class WebKernelDispatcher
     }
 
     /**
-     * 
+     *
      * Caught an exception while dispatching.
-     * 
+     *
      * @param Exception $exception The caught exception.
-     * 
+     *
      * @return null
-     * 
+     *
      */
     protected function caughtException(Exception $e)
     {

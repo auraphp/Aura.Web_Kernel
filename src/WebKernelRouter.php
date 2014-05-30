@@ -1,12 +1,12 @@
 <?php
 /**
- * 
+ *
  * This file is part of Aura for PHP.
- * 
+ *
  * @package Aura.Web_Kernel
- * 
+ *
  * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
  */
 namespace Aura\Web_Kernel;
 
@@ -15,51 +15,51 @@ use Aura\Router\Router;
 use Psr\Log\LoggerInterface;
 
 /**
- * 
+ *
  * Web kernel router logic.
- * 
+ *
  * @package Aura.Web_Kernel
- * 
+ *
  */
 class WebKernelRouter
 {
     /**
-     * 
+     *
      * A web (not HTTP!) request object.
-     * 
+     *
      * @var Request
-     * 
+     *
      */
     protected $request;
-    
+
     /**
-     * 
+     *
      * A web router.
-     * 
+     *
      * @var Router
-     * 
+     *
      */
     protected $router;
 
     /**
-     * 
+     *
      * A PSR-3 logger.
-     * 
+     *
      * @var LoggerInterface
-     * 
+     *
      */
     protected $logger;
 
     /**
-     * 
+     *
      * Constructor.
-     * 
+     *
      * @param Request $request A web request object.
-     * 
+     *
      * @param Router $router A web router.
-     * 
+     *
      * @param LoggerInterface $logger A PSR-3 logger.
-     * 
+     *
      */
     public function __construct(
         Request $request,
@@ -70,13 +70,13 @@ class WebKernelRouter
         $this->router = $router;
         $this->logger = $logger;
     }
-    
+
     /**
-     * 
+     *
      * Determines the route and inserts the route params into the request.
-     * 
+     *
      * @return null
-     * 
+     *
      */
     public function __invoke()
     {
@@ -91,11 +91,11 @@ class WebKernelRouter
     }
 
     /**
-     * 
+     *
      * Gets the path from the URL.
-     * 
+     *
      * @return string
-     * 
+     *
      */
     protected function getPath()
     {
@@ -104,13 +104,13 @@ class WebKernelRouter
     }
 
     /**
-     * 
+     *
      * Removes the bootstrap script (if any) from the URL path.
-     * 
+     *
      * @param string $path The URL path.
-     * 
+     *
      * @return string
-     * 
+     *
      */
     protected function removeScriptFromPath($path)
     {
@@ -123,13 +123,13 @@ class WebKernelRouter
     }
 
     /**
-     * 
+     *
      * Given a URL path, gets a matching route from the router.
-     * 
+     *
      * @param string $path The URL path.
-     * 
+     *
      * @return string
-     * 
+     *
      */
     protected function getRoute($path)
     {
@@ -141,11 +141,11 @@ class WebKernelRouter
     }
 
     /**
-     * 
+     *
      * Logs the different routes tried by the router.
-     * 
+     *
      * @return null
-     * 
+     *
      */
     protected function logRoutesTried()
     {
