@@ -17,7 +17,7 @@ namespace Aura\Web_Kernel;
  * @package Aura.Web_Kernel
  *
  */
-class MissingRoute extends AbstractController
+class MissingRoute extends AbstractAction
 {
     /**
      *

@@ -15,15 +15,15 @@ use Aura\Web\Response;
 
 /**
  *
- * An abstract web kernel controller.
+ * An abstract web kernel action.
  *
- * You should probably *not* extend this for your own controllers. Create your
- * own base controller so that you can avoid a dependency on this package.
+ * You should probably *not* extend this for your own actions. Create your
+ * own base action so that you can avoid a dependency on this package.
  *
  * @package Aura.Web_Kernel
  *
  */
-abstract class AbstractController
+abstract class AbstractAction
 {
     /**
      *

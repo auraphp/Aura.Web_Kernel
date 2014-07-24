@@ -12,25 +12,25 @@ namespace Aura\Web_Kernel;
 
 /**
  *
- * A controller for when the web kernel cannot find a controller for a route.
+ * A action for when the web kernel cannot find a action for a route.
  *
  * @package Aura.Web_Kernel
  *
  */
-class MissingController extends AbstractController
+class MissingAction extends AbstractAction
 {
     /**
      *
-     * Invokes the controller.
+     * Invokes the action.
      *
-     * @param string $missing_controller The name of the missing controller.
+     * @param string $missing_action The name of the missing action.
      *
      * @return null
      *
      */
-    public function __invoke($missing_controller)
+    public function __invoke($missing_action)
     {
-        $content = "Missing controller '$missing_controller' for "
+        $content = "Missing action '$missing_action' for "
                  . $this->request->method->get() . ' '
                  . $this->request->url->get(PHP_URL_PATH) . PHP_EOL . PHP_EOL
                  . 'Params: ' . var_export($this->request->params->get(), true)

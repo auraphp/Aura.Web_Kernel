@@ -14,16 +14,16 @@ use Exception;
 
 /**
  *
- * A controller for when the web kernel catches an exception.
+ * A action for when the web kernel catches an exception.
  *
  * @package Aura.Web_Kernel
  *
  */
-class CaughtException extends AbstractController
+class CaughtException extends AbstractAction
 {
     /**
      *
-     * Invokes the controller.
+     * Invokes the action.
      *
      * @param Exception $exception The exception caught by the web kernel.
      *

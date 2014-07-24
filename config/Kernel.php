@@ -21,21 +21,21 @@ class Kernel extends Config
 
         $router->add(null, '/aura/web-kernel/integration/hello')
             ->addValues(array(
-                'controller' => function () use ($request, $response) {
+                'action' => function () use ($request, $response) {
                     $response->headers->set('X-Hello', 'World');
                     $response->cookies->set('hello', 'world');
                     $response->content->set('Hello World!');
                 },
             ));
 
-        $router->add(null, '/aura/web-kernel/integration/missing-controller')
+        $router->add(null, '/aura/web-kernel/integration/missing-action')
             ->addValues(array(
-                'controller' => 'no-such-controller',
+                'action' => 'no-such-action',
             ));
 
         $router->add(null, '/aura/web-kernel/integration/throw-exception')
             ->addValues(array(
-                'controller' => function () {
+                'action' => function () {
                     throw new \Exception('Mock exception');
                 },
             ));

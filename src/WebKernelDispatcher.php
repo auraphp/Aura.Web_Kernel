@@ -81,9 +81,9 @@ class WebKernelDispatcher
      */
     public function __invoke()
     {
-        $controller = $this->request->params->get('controller');
-        $this->logControllerValue($controller);
-        $this->checkForMissingController($controller);
+        $action = $this->request->params->get('action');
+        $this->logControllerValue($action);
+        $this->checkForMissingController($action);
         try {
             $this->dispatcher->__invoke($this->request->params->get());
         } catch (Exception $e) {
@@ -93,44 +93,44 @@ class WebKernelDispatcher
 
     /**
      *
-     * Logs the controller to be dispatched to.
+     * Logs the action to be dispatched to.
      *
-     * @param mixed $controller The controller to be dispatched to.
+     * @param mixed $action The action to be dispatched to.
      *
      * @return null
      *
      */
-    protected function logControllerValue($controller)
+    protected function logControllerValue($action)
     {
         $message = __METHOD__ . ' to ';
-        if (is_object($controller)) {
+        if (is_object($action)) {
             $message .= 'object';
         } else {
-            $message .= $controller;
+            $message .= $action;
         }
         $this->logger->debug($message);
     }
 
     /**
      *
-     * Check for a missing controller.
+     * Check for a missing action.
      *
-     * @param mixed $controller The controller to be dispatched to.
+     * @param mixed $action The action to be dispatched to.
      *
      * @return null
      *
      */
-    protected function checkForMissingController($controller)
+    protected function checkForMissingController($action)
     {
-        $exists = is_object($controller)
-               || $this->dispatcher->hasObject($controller);
+        $exists = is_object($action)
+               || $this->dispatcher->hasObject($action);
         if ($exists) {
             return;
         }
 
-        $this->logger->debug(__METHOD__ . " missing controller '$controller'");
-        $this->request->params['controller']  = 'aura.web_kernel.missing_controller';
-        $this->request->params['missing_controller'] = $controller;
+        $this->logger->debug(__METHOD__ . " missing action '$action'");
+        $this->request->params['action']  = 'aura.web_kernel.missing_action';
+        $this->request->params['missing_action'] = $action;
     }
 
     /**
@@ -146,7 +146,7 @@ class WebKernelDispatcher
     {
         $this->logger->debug(__CLASS__ . " caught exception " . get_class($e));
         $this->dispatcher->__invoke(array(
-            'controller' => 'aura.web_kernel.caught_exception',
+            'action' => 'aura.web_kernel.caught_exception',
             'exception' => $e,
         ));
     }
