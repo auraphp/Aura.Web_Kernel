@@ -92,6 +92,21 @@ class WebKernelRouter
 
     /**
      *
+     * Magic get for read-only properties.
+     *
+     * @param string $key The property name.
+     *
+     * @return mixed The property.
+     *
+     */
+    public function __get($key)
+    {
+        return $this->$key;
+    }
+
+
+    /**
+     *
      * Gets the path from the URL.
      *
      * @return string

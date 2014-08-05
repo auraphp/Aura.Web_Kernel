@@ -93,6 +93,20 @@ class WebKernelDispatcher
 
     /**
      *
+     * Magic get for read-only properties.
+     *
+     * @param string $key The property name.
+     *
+     * @return mixed The property.
+     *
+     */
+    public function __get($key)
+    {
+        return $this->$key;
+    }
+
+    /**
+     *
      * Logs the action to be dispatched to.
      *
      * @param mixed $action The action to be dispatched to.
