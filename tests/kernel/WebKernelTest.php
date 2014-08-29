@@ -63,18 +63,18 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expect, $actual);
     }
 
-    public function testMissingContoller()
+    public function testMissingAction()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
-        $_SERVER['REQUEST_URI'] = '/aura/web-kernel/integration/missing-controller';
+        $_SERVER['REQUEST_URI'] = '/aura/web-kernel/integration/missing-action';
         $web_kernel = $this->index();
 
         $expect = <<<EXPECT
-Missing controller 'no-such-controller' for GET /aura/web-kernel/integration/missing-controller
+Missing action 'no-such-action' for GET /aura/web-kernel/integration/missing-action
 
 Params: array (
-  'controller' => 'aura.web_kernel.missing_controller',
-  'missing_controller' => 'no-such-controller',
+  'action' => 'aura.web_kernel.missing_action',
+  'missing_action' => 'no-such-action',
 )
 EXPECT;
         $actual = trim(FakeResponseSender::$content);
