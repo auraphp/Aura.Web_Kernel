@@ -12,4 +12,4 @@ require $composer_autoload;
 require dirname(dirname(__DIR__)) . '/autoload.php';
 
 // need the fake response sender from the Aura.Web tests
-require __DIR__ . "/vendor/aura/web/tests/src/FakeResponseSender.php";
+require __DIR__ . "/vendor/aura/web/tests/unit/src/FakeResponseSender.php";

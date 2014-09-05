@@ -15,9 +15,9 @@ class Kernel extends Config
 
     public function modify(Container $di)
     {
-        $request = $di->get('web_request');
-        $response = $di->get('web_response');
-        $router = $di->get('web_router');
+        $request = $di->get('aura/web-kernel:request');
+        $response = $di->get('aura/web-kernel:response');
+        $router = $di->get('aura/web-kernel:router');
 
         $router->add(null, '/aura/web-kernel/integration/hello')
             ->addValues(array(
