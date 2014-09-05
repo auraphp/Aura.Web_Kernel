@@ -9,11 +9,11 @@ class Common extends Config
     public function define(Container $di)
     {
         // services
-        $di->set('web_request', $di->lazyNew('Aura\Web\Request'));
-        $di->set('web_response', $di->lazyNew('Aura\Web\Response'));
-        $di->set('web_response_sender', $di->lazyNew('Aura\Web\ResponseSender'));
-        $di->set('web_router', $di->lazyNew('Aura\Router\Router'));
-        $di->set('web_dispatcher', $di->lazyNew('Aura\Dispatcher\Dispatcher'));
+        $di->set('aura/web-kernel:request', $di->lazyNew('Aura\Web\Request'));
+        $di->set('aura/web-kernel:response', $di->lazyNew('Aura\Web\Response'));
+        $di->set('aura/web-kernel:response_sender', $di->lazyNew('Aura\Web\ResponseSender'));
+        $di->set('aura/web-kernel:router', $di->lazyNew('Aura\Router\Router'));
+        $di->set('aura/web-kernel:dispatcher', $di->lazyNew('Aura\Dispatcher\Dispatcher'));
 
         // Aura\Web\ResponseSender
         $di->params['Aura\Web\ResponseSender'] = array(
@@ -51,12 +51,12 @@ class Common extends Config
 
     public function modify(Container $di)
     {
-        $dispatcher = $di->get('web_dispatcher');
-        $request = $di->get('web_request');
-        $response = $di->get('web_response');
+        $dispatcher = $di->get('aura/web-kernel:dispatcher');
+        $request = $di->get('aura/web-kernel:request');
+        $response = $di->get('aura/web-kernel:response');
 
         // use 'action' from the route params
-        $dispatcher->setObjectParam('action');        
+        $dispatcher->setObjectParam('action');
 
         // for when the url has no matching route
         $dispatcher->setObject(
