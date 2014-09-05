@@ -17,13 +17,13 @@ class Common extends Config
 
         // Aura\Web\ResponseSender
         $di->params['Aura\Web\ResponseSender'] = array(
-            'response' => $di->lazyGet('web_response'),
+            'response' => $di->lazyGet('aura/web-kernel:response'),
         );
 
         // Aura\Web_Kernel\AbstractAction
         $di->params['Aura\Web_Kernel\AbstractAction'] = array(
-            'request' => $di->lazyGet('web_request'),
-            'response' => $di->lazyGet('web_response'),
+            'request' => $di->lazyGet('aura/web-kernel:request'),
+            'response' => $di->lazyGet('aura/web-kernel:response'),
         );
 
         // Aura\Web_Kernel\WebKernel
@@ -35,16 +35,16 @@ class Common extends Config
 
         // Aura\Web_Kernel\WebKernelDispatcher
         $di->params['Aura\Web_Kernel\WebKernelDispatcher'] = array(
-            'request' => $di->lazyGet('web_request'),
-            'dispatcher' => $di->lazyGet('web_dispatcher'),
-            'logger' => $di->lazyGet('logger'),
+            'request' => $di->lazyGet('aura/web-kernel:request'),
+            'dispatcher' => $di->lazyGet('aura/web-kernel:dispatcher'),
+            'logger' => $di->lazyGet('aura/project-kernel:logger'),
         );
 
         // Aura\Web_Kernel\WebKernelRouter
         $di->params['Aura\Web_Kernel\WebKernelRouter'] = array(
-            'request' => $di->lazyGet('web_request'),
-            'router' => $di->lazyGet('web_router'),
-            'logger' => $di->lazyGet('logger'),
+            'request' => $di->lazyGet('aura/web-kernel:request'),
+            'router' => $di->lazyGet('aura/web-kernel:router'),
+            'logger' => $di->lazyGet('aura/project-kernel:logger'),
         );
 
     }
