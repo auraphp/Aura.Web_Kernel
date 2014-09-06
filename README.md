@@ -6,7 +6,7 @@ This is a kernel for the [Aura.Web_Project](https://github.com/auraphp/Aura.Web_
 
 ### Requirements
 
-This kernel requires PHP 5.4 or later. Unlike Aura library packages, this 
+This kernel requires PHP 5.4 or later. Unlike Aura library packages, this
 kernel package has userland dependencies, which themselves may have other
 dependencies:
 
@@ -24,7 +24,7 @@ This kernel is installable and autoloadable via Composer with the following
     "require": {
         "aura/web-kernel": "dev-develop-2"
     }
-    
+
 Alternatively, download or clone this repository, then require or include its
 _autoload.php_ file.
 
@@ -32,8 +32,8 @@ _autoload.php_ file.
 
 [![Build Status](https://travis-ci.org/auraphp/Aura.Web_Kernel.png?branch=develop-2)](https://travis-ci.org/auraphp/Aura.Web_Kernel)
 
-This kernel has 100% code coverage with [PHPUnit](http://phpunit.de). To run 
-the tests at the command line, go to the `tests/kernel/` directory and issue 
+This kernel has 100% code coverage with [PHPUnit](http://phpunit.de). To run
+the tests at the command line, go to the `tests/kernel/` directory and issue
 `./phpunit.sh`.
 
 ### PSR Compliance
@@ -53,9 +53,9 @@ To ask questions, provide feedback, or otherwise communicate with the Aura commu
 
 This kernel defines the following service objects in the _Container_:
 
-- `web_dispatcher`: an instance of _Aura\Dispatcher\Dispatcher_
-- `web_request`: an instance of _Aura\Web\Request_
-- `web_response`: an instance of _Aura\Web\Response_
-- `web_router`: an instance of _Aura\Router\Router_
+- `aura/web-kernel:dispatcher`: an instance of _Aura\Dispatcher\Dispatcher_
+- `aura/web-kernel:request`: an instance of _Aura\Web\Request_
+- `aura/web-kernel:response`: an instance of _Aura\Web\Response_
+- `aura/web-kernel:router`: an instance of _Aura\Router\Router_
 
 Note that service definitions set at the kernel level may be reset at the project level.
