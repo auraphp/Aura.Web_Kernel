@@ -37,14 +37,14 @@ class Common extends Config
         $di->params['Aura\Web_Kernel\WebKernelDispatcher'] = array(
             'request' => $di->lazyGet('web_request'),
             'dispatcher' => $di->lazyGet('web_dispatcher'),
-            'logger' => $di->lazyGet('logger'),
+            'logger' => $di->lazyGet('aura/project-kernel:logger'),
         );
 
         // Aura\Web_Kernel\WebKernelRouter
         $di->params['Aura\Web_Kernel\WebKernelRouter'] = array(
             'request' => $di->lazyGet('web_request'),
             'router' => $di->lazyGet('web_router'),
-            'logger' => $di->lazyGet('logger'),
+            'logger' => $di->lazyGet('aura/project-kernel:logger'),
         );
 
     }
@@ -56,7 +56,7 @@ class Common extends Config
         $response = $di->get('web_response');
 
         // use 'action' from the route params
-        $dispatcher->setObjectParam('action');        
+        $dispatcher->setObjectParam('action');
 
         // for when the url has no matching route
         $dispatcher->setObject(
