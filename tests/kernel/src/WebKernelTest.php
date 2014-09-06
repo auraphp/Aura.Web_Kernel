@@ -16,7 +16,7 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
     {
         $_SERVER['HTTP_HOST'] = 'example.com';
 
-        $path = __DIR__;
+        $path = dirname(__DIR__);
         $di = (new Factory)->newContainer(
             $path,
             'kernel',

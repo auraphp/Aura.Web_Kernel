@@ -1,40 +1,45 @@
 <?php
 spl_autoload_register(function ($class) {
 
-    $ns  = 'Aura\Web_Kernel';
+    // the package namespace
+    $ns = 'Aura\Web_Kernel';
 
-    $dir = __DIR__ . DIRECTORY_SEPARATOR;
-    $prefix_paths = array(
-        "$ns\\" => array(
-            $dir . 'src',
-            $dir . 'tests' . DIRECTORY_SEPARATOR . 'src',
+    // what prefixes should be recognized?
+    $prefixes = array(
+        "{$ns}\_Config\\" => array(
+            __DIR__ . '/config',
+            __DIR__ . '/tests/kernel/config',
         ),
-        "$ns\\_Config\\" => array(
-            $dir . 'config',
+        "{$ns}\\" => array(
+            __DIR__ . '/src',
+            __DIR__ . '/tests/kernel/src',
         ),
     );
-    
-    // go through the directories to find classes
-    foreach ($prefix_paths as $prefix => $paths) {
+
+    // go through the prefixes
+    foreach ($prefixes as $prefix => $dirs) {
 
         // does the requested class match the namespace prefix?
         $prefix_len = strlen($prefix);
         if (substr($class, 0, $prefix_len) !== $prefix) {
             continue;
         }
-        
+
         // strip the prefix off the class
-        $suffix = substr($class, $prefix_len);
-        
+        $class = substr($class, $prefix_len);
+
         // a partial filename
-        $part = str_replace('\\', DIRECTORY_SEPARATOR, $suffix) . '.php';
-        
-        foreach ($paths as $path) {
-            $file = $path . DIRECTORY_SEPARATOR . $part;
+        $part = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
+
+        // go through the directories to find classes
+        foreach ($dirs as $dir) {
+            $dir = str_replace('/', DIRECTORY_SEPARATOR, $dir);
+            $file = $dir . DIRECTORY_SEPARATOR . $part;
             if (is_readable($file)) {
                 require $file;
                 return;
             }
         }
     }
+
 });
