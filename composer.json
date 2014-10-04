@@ -16,11 +16,10 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "aura/project-kernel": "2.*@dev",
-        "aura/dispatcher": "2.*@dev",
-        "aura/router": "2.*@dev",
-        "aura/web": "2.*@dev",
-        "psr/log": "1.*"
+        "aura/project-kernel": "~2.0",
+        "aura/dispatcher": "~2.0",
+        "aura/router": "~2.0",
+        "aura/web": "~2.0"
     },
     "autoload": {
         "psr-4": {
@@ -33,12 +32,11 @@
             "type": "kernel",
             "config": {
                 "common": "Aura\\Web_Kernel\\_Config\\Common",
-                "kernel": "Aura\\Web_Kernel\\_Config\\Kernel"
+                "web-kernel-test": "Aura\\Web_Kernel\\_Config\\WebKernelTest"
             }
         },
         "branch-alias": {
             "dev-develop-2": "2.0.x-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }

@@ -4,7 +4,7 @@ namespace Aura\Web_Kernel\_Config;
 use Aura\Di\Config;
 use Aura\Di\Container;
 
-class Kernel extends Config
+class WebKernelTest extends Config
 {
     public function define(Container $di)
     {
