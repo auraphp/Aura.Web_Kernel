@@ -10,7 +10,6 @@
  */
 namespace Aura\Web_Kernel;
 
-use Aura\Web\Request;
 use Aura\Web\Response;
 
 /**
@@ -23,22 +22,15 @@ use Aura\Web\Response;
  * @package Aura.Web_Kernel
  *
  */
-abstract class AbstractAction
+abstract class AbstractResponder
 {
-    /**
-     *
-     * A web (not HTTP!) request object.
-     *
-     * @var Request
-     *
-     */
-    protected $request;
+    protected $data;
 
     /**
      *
-     * A web (not HTTP!) response object.
+     * A web response object.
      *
-     * @var Request
+     * @var Response
      *
      */
     protected $response;
@@ -49,12 +41,16 @@ abstract class AbstractAction
      *
      * @param Request $request A web request object.
      *
-     * @param Response $response A web response object.
+     * @param Responder $responder A responder object.
      *
      */
-    public function __construct(Request $request, Response $response)
+    public function __construct(Response $response)
     {
-        $this->request = $request;
         $this->response = $response;
+    }
+
+    public function setData(array $data)
+    {
+        $this->data = $data;
     }
 }

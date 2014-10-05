@@ -20,17 +20,24 @@ class Common extends Config
             'response' => $di->lazyGet('aura/web-kernel:response'),
         );
 
-        // Aura\Web_Kernel\AbstractAction
-        $di->params['Aura\Web_Kernel\AbstractAction'] = array(
-            'request' => $di->lazyGet('aura/web-kernel:request'),
-            'response' => $di->lazyGet('aura/web-kernel:response'),
+        // Aura\Web_Kernel\Abstract_Responder
+        $di->params['Aura\Web_Kernel\AbstractResponder'] = array(
+            'response' => $di->lazyGet('aura/web-kernel:response')
         );
 
-        // Aura\Web_Kernel\WebKernel
-        $di->params['Aura\Web_Kernel\WebKernel'] = array(
-            'router' => $di->lazyNew('Aura\Web_Kernel\WebKernelRouter'),
-            'dispatcher' => $di->lazyNew('Aura\Web_Kernel\WebKernelDispatcher'),
-            'response_sender' => $di->lazyNew('Aura\Web\ResponseSender'),
+        // Aura\Web_Kernel\CaughtException
+        $di->params['Aura\Web_Kernel\CaughtException'] = array(
+            'request' => $di->lazyGet('aura/web-kernel:request')
+        );
+
+        // Aura\Web_Kernel\MissingAction
+        $di->params['Aura\Web_Kernel\MissingAction'] = array(
+            'request' => $di->lazyGet('aura/web-kernel:request')
+        );
+
+        // Aura\Web_Kernel\MissingRoute
+        $di->params['Aura\Web_Kernel\MissingRoute'] = array(
+            'request' => $di->lazyGet('aura/web-kernel:request')
         );
 
         // Aura\Web_Kernel\WebKernelDispatcher
@@ -58,19 +65,19 @@ class Common extends Config
         // use 'action' from the route params
         $dispatcher->setObjectParam('action');
 
-        // for when the url has no matching route
+        // the url has no matching route
         $dispatcher->setObject(
             'aura.web_kernel.missing_route',
             $di->lazyNew('Aura\Web_Kernel\MissingRoute')
         );
 
-        // for when the controller was not found
+        // the action was not found
         $dispatcher->setObject(
             'aura.web_kernel.missing_action',
             $di->lazyNew('Aura\Web_Kernel\MissingAction')
         );
 
-        // for when the kernel has caught an exception
+        // the kernel caught an exception
         $dispatcher->setObject(
             'aura.web_kernel.caught_exception',
             $di->lazyNew('Aura\Web_Kernel\CaughtException')

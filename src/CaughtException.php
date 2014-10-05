@@ -10,6 +10,7 @@
  */
 namespace Aura\Web_Kernel;
 
+use Aura\Web\Request;
 use Exception;
 
 /**
@@ -19,8 +20,43 @@ use Exception;
  * @package Aura.Web_Kernel
  *
  */
-class CaughtException extends AbstractAction
+class CaughtException
 {
+    /**
+     *
+     * A web request object.
+     *
+     * @var Request
+     *
+     */
+    protected $request;
+
+    /**
+     *
+     * A responder object.
+     *
+     * @var Responder
+     *
+     */
+    protected $responder;
+
+    /**
+     *
+     * Constructor.
+     *
+     * @param Request $request A web request object.
+     *
+     * @param CaughtExceptionResponder $responder A responder object.
+     *
+     */
+    public function __construct(
+        Request $request,
+        CaughtExceptionResponder $responder
+    ) {
+        $this->request = $request;
+        $this->responder = $responder;
+    }
+
     /**
      *
      * Invokes the action.
@@ -32,15 +68,12 @@ class CaughtException extends AbstractAction
      */
     public function __invoke(Exception $exception)
     {
-        $content = "Exception '" . get_class($exception) . "' thrown for "
-                 . $this->request->method->get() . ' '
-                 . $this->request->url->get(PHP_URL_PATH) . PHP_EOL . PHP_EOL
-                 . 'Params: ' . var_export($this->request->params->get(), true)
-                 . PHP_EOL . PHP_EOL
-                 . (string) $exception
-                 . PHP_EOL;
-        $this->response->status->set('500', 'Server Error');
-        $this->response->content->set($content);
-        $this->response->content->setType('text/plain');
+        $this->responder->setData(array(
+            'exception' => $exception,
+            'method' => $this->request->method->get(),
+            'path' => $this->request->url->get(PHP_URL_PATH),
+            'params' => $this->request->params->get()
+        ));
+        $this->responder->__invoke();
     }
 }

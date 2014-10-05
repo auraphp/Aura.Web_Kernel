@@ -10,6 +10,8 @@
  */
 namespace Aura\Web_Kernel;
 
+use Aura\Web\Request;
+
 /**
  *
  * A action for when the web kernel cannot find a action for a route.
@@ -17,8 +19,43 @@ namespace Aura\Web_Kernel;
  * @package Aura.Web_Kernel
  *
  */
-class MissingAction extends AbstractAction
+class MissingAction
 {
+    /**
+     *
+     * A web request object.
+     *
+     * @var Request
+     *
+     */
+    protected $request;
+
+    /**
+     *
+     * A responder object.
+     *
+     * @var Responder
+     *
+     */
+    protected $responder;
+
+    /**
+     *
+     * Constructor.
+     *
+     * @param Request $request A web request object.
+     *
+     * @param CaughtExceptionResponder $responder A responder object.
+     *
+     */
+    public function __construct(
+        Request $request,
+        MissingActionResponder $responder
+    ) {
+        $this->request = $request;
+        $this->responder = $responder;
+    }
+
     /**
      *
      * Invokes the action.
@@ -30,13 +67,12 @@ class MissingAction extends AbstractAction
      */
     public function __invoke($missing_action)
     {
-        $content = "Missing action '$missing_action' for "
-                 . $this->request->method->get() . ' '
-                 . $this->request->url->get(PHP_URL_PATH) . PHP_EOL . PHP_EOL
-                 . 'Params: ' . var_export($this->request->params->get(), true)
-                 . PHP_EOL;
-        $this->response->status->set('404', 'Not Found');
-        $this->response->content->set($content);
-        $this->response->content->setType('text/plain');
+        $this->responder->setData(array(
+            'missing_action' => $missing_action,
+            'method' => $this->request->method->get(),
+            'path' => $this->request->url->get(PHP_URL_PATH),
+            'params' => $this->request->params->get(),
+        ));
+        $this->responder->__invoke();
     }
 }

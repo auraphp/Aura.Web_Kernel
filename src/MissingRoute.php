@@ -10,6 +10,8 @@
  */
 namespace Aura\Web_Kernel;
 
+use Aura\Web\Request;
+
 /**
  *
  * A controller for when the web kernel cannot find a route for the request.
@@ -17,8 +19,43 @@ namespace Aura\Web_Kernel;
  * @package Aura.Web_Kernel
  *
  */
-class MissingRoute extends AbstractAction
+class MissingRoute
 {
+    /**
+     *
+     * A web request object.
+     *
+     * @var Request
+     *
+     */
+    protected $request;
+
+    /**
+     *
+     * A responder object.
+     *
+     * @var Responder
+     *
+     */
+    protected $responder;
+
+    /**
+     *
+     * Constructor.
+     *
+     * @param Request $request A web request object.
+     *
+     * @param CaughtExceptionResponder $responder A responder object.
+     *
+     */
+    public function __construct(
+        Request $request,
+        MissingRouteResponder $responder
+    ) {
+        $this->request = $request;
+        $this->responder = $responder;
+    }
+
     /**
      *
      * Invokes the controller.
@@ -28,12 +65,10 @@ class MissingRoute extends AbstractAction
      */
     public function __invoke()
     {
-        $content = 'No route for '
-                 . $this->request->method->get() . ' '
-                 . $this->request->url->get(PHP_URL_PATH)
-                 . PHP_EOL;
-        $this->response->status->set('404', 'Not Found');
-        $this->response->content->set($content);
-        $this->response->content->setType('text/plain');
+        $this->responder->setData(array(
+            'method' => $this->request->method->get(),
+            'path' => $this->request->url->get(PHP_URL_PATH),
+        ));
+        $this->responder->__invoke();
     }
 }
