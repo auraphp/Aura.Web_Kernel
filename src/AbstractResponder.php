@@ -24,6 +24,13 @@ use Aura\Web\Response;
  */
 abstract class AbstractResponder
 {
+    /**
+     *
+     * Data for building the response.
+     *
+     * @var array
+     *
+     */
     protected $data;
 
     /**
@@ -49,8 +56,26 @@ abstract class AbstractResponder
         $this->response = $response;
     }
 
+    /**
+     *
+     * Sets data for building the response.
+     *
+     * @param array $data Data for the response.
+     *
+     * @return null
+     *
+     */
     public function setData(array $data)
     {
         $this->data = $data;
     }
+
+    /**
+     *
+     * Invokes the responder.
+     *
+     * @return null
+     *
+     */
+    abstract public function __invoke();
 }
