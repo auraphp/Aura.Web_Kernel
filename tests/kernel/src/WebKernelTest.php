@@ -16,11 +16,12 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
     protected function index()
     {
         $_SERVER['HTTP_HOST'] = 'example.com';
-        return (new Factory)->newKernel(
+        $web_kernel = (new Factory)->newKernel(
             dirname(__DIR__),
-            'Aura\Web_Kernel\WebKernel',
-            ContainerBuilder::DISABLE_AUTO_RESOLVE
+            'Aura\Web_Kernel\WebKernel'
         );
+        $web_kernel();
+        return $web_kernel;
     }
 
     public function testHelloWorld()
