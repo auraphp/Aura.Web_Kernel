@@ -18,7 +18,8 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST'] = 'example.com';
         $web_kernel = (new Factory)->newKernel(
             dirname(__DIR__),
-            'Aura\Web_Kernel\WebKernel'
+            'Aura\Web_Kernel\WebKernel',
+            ContainerBuilder::DISABLE_AUTO_RESOLVE
         );
         $web_kernel();
         return $web_kernel;
