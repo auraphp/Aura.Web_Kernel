@@ -11,7 +11,6 @@ class Common extends Config
         // services
         $di->set('aura/web-kernel:request', $di->lazyNew('Aura\Web\Request'));
         $di->set('aura/web-kernel:response', $di->lazyNew('Aura\Web\Response'));
-        $di->set('aura/web-kernel:response_sender', $di->lazyNew('Aura\Web\ResponseSender'));
         $di->set('aura/web-kernel:router', $di->lazyNew('Aura\Router\Router'));
         $di->set('aura/web-kernel:dispatcher', $di->lazyNew('Aura\Dispatcher\Dispatcher'));
 
@@ -22,22 +21,32 @@ class Common extends Config
 
         // Aura\Web_Kernel\Abstract_Responder
         $di->params['Aura\Web_Kernel\AbstractResponder'] = array(
-            'response' => $di->lazyGet('aura/web-kernel:response')
+            'response' => $di->lazyGet('aura/web-kernel:response'),
         );
 
         // Aura\Web_Kernel\CaughtException
         $di->params['Aura\Web_Kernel\CaughtException'] = array(
-            'request' => $di->lazyGet('aura/web-kernel:request')
+            'request' => $di->lazyGet('aura/web-kernel:request'),
+            'responder' => $di->lazyNew('Aura\Web_Kernel\CaughtExceptionResponder'),
         );
 
         // Aura\Web_Kernel\MissingAction
         $di->params['Aura\Web_Kernel\MissingAction'] = array(
-            'request' => $di->lazyGet('aura/web-kernel:request')
+            'request' => $di->lazyGet('aura/web-kernel:request'),
+            'responder' => $di->lazyNew('Aura\Web_Kernel\MissingActionResponder'),
         );
 
         // Aura\Web_Kernel\MissingRoute
         $di->params['Aura\Web_Kernel\MissingRoute'] = array(
-            'request' => $di->lazyGet('aura/web-kernel:request')
+            'request' => $di->lazyGet('aura/web-kernel:request'),
+            'responder' => $di->lazyNew('Aura\Web_Kernel\MissingRouteResponder'),
+        );
+
+        // Aura\Web_Kernel\WebKernel
+        $di->params['Aura\Web_Kernel\WebKernel'] = array(
+            'router' => $di->lazyNew('Aura\Web_Kernel\WebKernelRouter'),
+            'dispatcher' => $di->lazyNew('Aura\Web_Kernel\WebKernelDispatcher'),
+            'response_sender' => $di->lazyNew('Aura\Web\ResponseSender'),
         );
 
         // Aura\Web_Kernel\WebKernelDispatcher
