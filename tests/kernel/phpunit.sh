@@ -6,6 +6,6 @@ then
 else
     composer install
 fi
-phpunit
+phpunit $@
 status=$?
 exit $status
