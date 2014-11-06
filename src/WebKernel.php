@@ -56,7 +56,7 @@ class WebKernel
      *
      * @param WebKernelDispatcher $dispatcher Web dispatcher logic.
      *
-     * @param ResponseSender $response_sender Web responder logic.
+     * @param ResponseSender $response_sender Web response-sending logic.
      *
      */
     public function __construct(
