@@ -1,6 +1,7 @@
 <?php
 namespace Aura\Web_Kernel;
 
+use Aura\Di\ContainerBuilder;
 use Aura\Project_Kernel\Factory;
 use Aura\Web\FakeResponseSender;
 
@@ -15,19 +16,11 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
     protected function index()
     {
         $_SERVER['HTTP_HOST'] = 'example.com';
-
-        $path = dirname(__DIR__);
-        $di = (new Factory)->newContainer(
-            $path,
-            'web-kernel-test',
-            "$path/composer.json",
-            "$path/vendor/composer/installed.json"
+        return (new Factory)->newKernel(
+            dirname(__DIR__),
+            'Aura\Web_Kernel\WebKernel',
+            ContainerBuilder::DISABLE_AUTO_RESOLVE
         );
-
-        $web_kernel = $di->newInstance('Aura\Web_Kernel\WebKernel');
-        $web_kernel();
-
-        return $web_kernel;
     }
 
     public function testHelloWorld()
