@@ -1,10 +1,11 @@
 <?php
-namespace Demograph\Kernel;
+namespace Tarcha\WebKernel\Responders;
 
 use Aura\Web\Response;
-use Demograph\Kernel\PayloadInterface;
+use Aura\Web_Kernel\AbstractResponder as AuraAbstractResponder;
+use Tarcha\WebKernel\Payloads\PayloadInterface;
 
-abstract class AbstractResponder
+abstract class AbstractResponder extends AuraAbstractResponder
 {
 
     protected $available = array();

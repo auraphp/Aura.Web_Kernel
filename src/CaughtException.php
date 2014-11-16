@@ -12,6 +12,7 @@ namespace Aura\Web_Kernel;
 
 use Aura\Web\Request;
 use Exception;
+use Aura\Web_Kernel\CaughtExceptionResponder;
 
 /**
  *

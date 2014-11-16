@@ -1,20 +1,27 @@
 <?php
-namespace Aura\Web_Kernel\_Config;
+namespace Tarcha\WebKernel\_Config;
 
+use Tarcha\WebKernel\_Config\Common;
 use Aura\Di\Config;
 use Aura\Di\Container;
 
-class WebKernelTest extends Config
+class WebKernelTest extends Common
 {
     public function define(Container $di)
     {
-        $di->params['Aura\Web_Kernel\WebKernel']['response_sender'] = $di->lazyNew(
-            'Aura\Web\FakeResponseSender'
-        );
+        parent::define($di);
+
+        $di->params['Aura\Web\FakeResponseSender']['response']
+            = $di->lazyGet('aura/web-kernel:response');
+
+        $di->params['Tarcha\WebKernel\WebKernel']['response_sender']
+            = $di->lazyNew('Aura\Web\FakeResponseSender');
     }
 
     public function modify(Container $di)
     {
+        parent::modify($di);
+
         $request = $di->get('aura/web-kernel:request');
         $response = $di->get('aura/web-kernel:response');
         $router = $di->get('aura/web-kernel:router');

@@ -1,6 +1,6 @@
 <?php
 
-namespace Demograph\Kernel\Payloads;
+namespace Tarcha\WebKernel\Payloads;
 
 class Json implements PayloadInterface
 {

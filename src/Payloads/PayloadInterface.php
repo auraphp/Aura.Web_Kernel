@@ -1,6 +1,6 @@
 <?php
 
-namespace Demograph\kernel;
+namespace Tarcha\WebKernel\Payloads;
 
 interface PayloadInterface
 {

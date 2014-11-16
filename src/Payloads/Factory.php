@@ -1,6 +1,6 @@
 <?php
 
-namespace Demograph\Kernel\Paylaods;
+namespace Tarcha\WebKernel\Payloads;
 
 use Aura\Di\Container;
 

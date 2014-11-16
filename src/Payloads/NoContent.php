@@ -1,8 +1,8 @@
 <?php
 
-namespace Demograph\Kernel\Payloads;
+namespace Tarcha\WebKernel\Payloads;
 
 class NoContent implements PayloadInterface
 {
-    
+
 }

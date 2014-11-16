@@ -1,6 +1,6 @@
 <?php
 
-namespace Demograph\Kernel;
+namespace Tarcha\WebKernel\Actions;
 
 use Aura\Web\Request;
 
