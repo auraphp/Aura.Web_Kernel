@@ -11,7 +11,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Aura\\Web_Kernel\\": "src/",
+            
             "Tarcha\\WebKernel\\_Config\\": "config/",
             "Tarcha\\WebKernel\\": "src/"
         }

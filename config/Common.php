@@ -1,18 +1,15 @@
 <?php
 namespace Tarcha\WebKernel\_Config;
 
+use Aura\Web_Kernel\_Config\Common as AuraConfig;
 use Aura\Di\Config;
 use Aura\Di\Container;
 
-class Common extends Config
+class Common extends AuraConfig
 {
     public function define(Container $di)
     {
-        // services
-        $di->set('aura/web-kernel:request', $di->lazyNew('Aura\Web\Request'));
-        $di->set('aura/web-kernel:response', $di->lazyNew('Aura\Web\Response'));
-        $di->set('aura/web-kernel:router', $di->lazyNew('Aura\Router\Router'));
-        $di->set('aura/web-kernel:dispatcher', $di->lazyNew('Aura\Dispatcher\Dispatcher'));
+        parent::define($di);
 
         $di->types['Aura\Web\Request'] = $di->lazyGet('aura/web-kernel:request');
         $di->types['Aura\Web\Response'] = $di->lazyGet('aura/web-kernel:response');
@@ -31,29 +28,7 @@ class Common extends Config
 
     public function modify(Container $di)
     {
-        $dispatcher = $di->get('aura/web-kernel:dispatcher');
-        $request = $di->get('aura/web-kernel:request');
-        $response = $di->get('aura/web-kernel:response');
+        parent::modify($di);
 
-        // use 'action' from the route params
-        $dispatcher->setObjectParam('action');
-
-        // the url has no matching route
-        $dispatcher->setObject(
-            'aura.web_kernel.missing_route',
-            $di->lazyNew('Aura\Web_Kernel\MissingRoute')
-        );
-
-        // the action was not found
-        $dispatcher->setObject(
-            'aura.web_kernel.missing_action',
-            $di->lazyNew('Aura\Web_Kernel\MissingAction')
-        );
-
-        // the kernel caught an exception
-        $dispatcher->setObject(
-            'aura.web_kernel.caught_exception',
-            $di->lazyNew('Aura\Web_Kernel\CaughtException')
-        );
     }
 }
