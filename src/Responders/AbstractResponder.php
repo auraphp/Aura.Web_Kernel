@@ -26,9 +26,25 @@ abstract class AbstractResponder extends AuraAbstractResponder
 
     protected function init()
     {
-        if (! isset($this->payload_method['Domain\Payload\Error'])) {
-            $this->payload_method['Domain\Payload\Error'] = 'error';
+        if (! isset($this->payload_method['Web_Kernel\Payload\Json'])) {
+            $this->payload_method['Tarcha\WebKernel\Payload\Json'] = 'json';
         }
+        if (! isset($this->payload_method['Web_Kernel\Payload\NoContent'])) {
+            $this->payload_method['Tarcha\WebKernel\Payload\NoContent'] = 'noContent';
+        }
+        if (! isset($this->payload_method['Web_Kernel\Payload\Error'])) {
+            $this->payload_method['Tarcha\WebKernel\Payload\Error'] = 'error';
+        }
+        if (! isset($this->payload_method['Web_Kernel\Payload\NotFound'])) {
+            $this->payload_method['Tarcha\WebKernel\Payload\NotFound'] = 'notFound';
+        }
+        if (! isset($this->payload_method['Web_Kernel\Payload\NotRecognized'])) {
+            $this->payload_method['Tarcha\WebKernel\Payload\NotRecognized'] = 'notRecognized';
+        }
+        if (! isset($this->payload_method['Web_Kernel\Payload\Success'])) {
+            $this->payload_method['Tarcha\WebKernel\Payload\Success'] = 'success';
+        }
+        
         $this->response->content->setType('application/json');
     }
 
@@ -79,6 +95,13 @@ abstract class AbstractResponder extends AuraAbstractResponder
         $data = $this->payload->get();
         $this->response->status->set('200');
         $this->response->content->set(json_encode($data));
+        return $this->response;
+    }
+    
+    protected function success()
+    {
+        $this->response->status->set('200');
+        $this->response->content->set('success');
         return $this->response;
     }
 }
