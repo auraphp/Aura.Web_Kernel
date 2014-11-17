@@ -26,22 +26,22 @@ abstract class AbstractResponder extends AuraAbstractResponder
 
     protected function init()
     {
-        if (! isset($this->payload_method['Web_Kernel\Payload\Json'])) {
+        if (! isset($this->payload_method['Tarcha\WebKernel\Payload\Json'])) {
             $this->payload_method['Tarcha\WebKernel\Payload\Json'] = 'json';
         }
-        if (! isset($this->payload_method['Web_Kernel\Payload\NoContent'])) {
+        if (! isset($this->payload_method['Tarcha\WebKernel\Payload\NoContent'])) {
             $this->payload_method['Tarcha\WebKernel\Payload\NoContent'] = 'noContent';
         }
-        if (! isset($this->payload_method['Web_Kernel\Payload\Error'])) {
+        if (! isset($this->payload_method['Tarcha\WebKernel\Payload\Error'])) {
             $this->payload_method['Tarcha\WebKernel\Payload\Error'] = 'error';
         }
-        if (! isset($this->payload_method['Web_Kernel\Payload\NotFound'])) {
+        if (! isset($this->payload_method['Tarcha\WebKernel\Payload\NotFound'])) {
             $this->payload_method['Tarcha\WebKernel\Payload\NotFound'] = 'notFound';
         }
-        if (! isset($this->payload_method['Web_Kernel\Payload\NotRecognized'])) {
+        if (! isset($this->payload_method['Tarcha\WebKernel\Payload\NotRecognized'])) {
             $this->payload_method['Tarcha\WebKernel\Payload\NotRecognized'] = 'notRecognized';
         }
-        if (! isset($this->payload_method['Web_Kernel\Payload\Success'])) {
+        if (! isset($this->payload_method['Tarcha\WebKernel\Payload\Success'])) {
             $this->payload_method['Tarcha\WebKernel\Payload\Success'] = 'success';
         }
         
