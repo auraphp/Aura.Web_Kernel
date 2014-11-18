@@ -1,5 +1,5 @@
 <?php
-namespace Aura\Web_Kernel;
+namespace Tarcha\WebKernel;
 
 use Aura\Di\ContainerBuilder;
 use Aura\Project_Kernel\Factory;
@@ -18,8 +18,7 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST'] = 'example.com';
         $web_kernel = (new Factory)->newKernel(
             dirname(__DIR__),
-            'Aura\Web_Kernel\WebKernel',
-            ContainerBuilder::DISABLE_AUTO_RESOLVE
+            'Tarcha\WebKernel\WebKernel'
         );
         $web_kernel();
         return $web_kernel;

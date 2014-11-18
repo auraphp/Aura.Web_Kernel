@@ -1,2 +1,2 @@
 <?php
-$_ENV['AURA_CONFIG_MODE'] = 'web-kernel-test';
+$_ENV['AURA_CONFIG_MODE'] = 'web-kernel-test2';
