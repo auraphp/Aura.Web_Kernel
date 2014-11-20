@@ -4,6 +4,7 @@ namespace Tarcha\WebKernel\Payloads;
 
 use Aura\Di\Container;
 
+
 class Factory
 {
     public function __construct(Container $di)
@@ -11,13 +12,33 @@ class Factory
         $this->di = $di;
     }
 
-    public function Json()
+    public function json(array $data)
     {
-        return $di->newInstance('Demograph\Kernel\Paylaods\Json');
+        return $di->newInstance('Tarcha\WebKernel\Paylaods\Json', $data);
     }
 
-    public function noContent()
+    public function noContent(array $data)
     {
-        return $di->newInstance('Demograph\Kernel\Paylaods\NoContent');
+        return $di->newInstance('Tarcha\WebKernel\Paylaods\NoContent', $data);
+    }
+    
+    public function success(array $data)
+    {
+        return $di->newInstance('Tarcha\WebKernel\Paylaods\Success', $data);
+    }
+    
+    public function error(array $data)
+    {
+        return $di->newInstance('Tarcha\WebKernel\Paylaods\Error', $data);
+    }
+    
+    public function notFound(array $data)
+    {
+        return $di->newInstance('Tarcha\WebKernel\Paylaods\NotFound', $data);
+    }
+    
+    public function notRecognized(array $data)
+    {
+        return $di->newInstance('Tarcha\WebKernel\Paylaods\NotRecognized', $data);
     }
 }
