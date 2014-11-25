@@ -31,7 +31,7 @@ class MissingActionResponder extends AbstractResponder
         $content = "Missing action '{$this->data['missing_action']}' "
                  . "for {$this->data['method']} {$this->data['path']}"
                  . PHP_EOL . PHP_EOL
-                 . 'Params: ' . var_export($this->data['params'], true)
+                 . "Params: " . $this->exportParams($this->data['params'])
                  . PHP_EOL;
         $this->response->status->set('404', 'Not Found');
         $this->response->content->set($content);

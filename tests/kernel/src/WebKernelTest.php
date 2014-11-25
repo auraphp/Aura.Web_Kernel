@@ -68,8 +68,14 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
 Missing action 'no-such-action' for GET /aura/web-kernel/integration/missing-action
 
 Params: array (
-  'action' => 'aura.web_kernel.missing_action',
-  'missing_action' => 'no-such-action',
+    'action' => 'aura.web_kernel.missing_action'
+    'true' => true
+    'false' => false
+    'null' => NULL
+    'object' => Aura\Web_Kernel\_Config\WebKernelTest
+    'int' => 88
+    'float' => 12.34
+    'missing_action' => 'no-such-action'
 )
 EXPECT;
         $actual = trim(FakeResponseSender::$content);

@@ -31,6 +31,12 @@ class WebKernelTest extends Config
         $router->add(null, '/aura/web-kernel/integration/missing-action')
             ->addValues(array(
                 'action' => 'no-such-action',
+                'true' => true,
+                'false' => false,
+                'null' => null,
+                'object' => $this,
+                'int' => 88,
+                'float' => 12.34
             ));
 
         $router->add(null, '/aura/web-kernel/integration/throw-exception')

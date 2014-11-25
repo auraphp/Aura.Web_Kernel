@@ -78,4 +78,23 @@ abstract class AbstractResponder
      *
      */
     abstract public function __invoke();
+
+    protected function exportParams($params)
+    {
+        if (! $params) {
+            return 'none';
+        }
+
+        $export = array();
+        foreach ($params as $key => $val) {
+            $key = var_export($key, true);
+            if (is_object($val)) {
+                $export[] = "    {$key} => " . get_class($val);
+            } else {
+                $export[] = "    {$key} => " . var_export($val, true);
+            }
+        }
+        return 'array (' . PHP_EOL . implode(PHP_EOL, $export) . PHP_EOL . ')';
+    }
+
 }

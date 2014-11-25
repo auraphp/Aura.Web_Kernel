@@ -31,11 +31,10 @@ class CaughtExceptionResponder extends AbstractResponder
     public function __invoke()
     {
         $class = get_class($this->data['exception']);
-        $export = var_export($this->data['params'], true);
         $content = "Exception '{$class}' thrown for "
                  . "{$this->data['method']} {$this->data['path']}"
                  . PHP_EOL . PHP_EOL
-                 . "Params: {$export}"
+                 . "Params: " . $this->exportParams($this->data['params'])
                  . PHP_EOL . PHP_EOL
                  . (string) $this->data['exception']
                  . PHP_EOL;
