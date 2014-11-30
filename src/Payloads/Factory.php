@@ -12,11 +12,6 @@ class Factory
         $this->di = $di;
     }
 
-    public function json(array $data)
-    {
-        return $di->newInstance('Tarcha\WebKernel\Paylaods\Json', $data);
-    }
-
     public function noContent(array $data)
     {
         return $di->newInstance('Tarcha\WebKernel\Paylaods\NoContent', $data);

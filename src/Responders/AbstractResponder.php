@@ -44,8 +44,6 @@ abstract class AbstractResponder extends AuraAbstractResponder
         if (! isset($this->payload_method['Tarcha\WebKernel\Payload\Success'])) {
             $this->payload_method['Tarcha\WebKernel\Payload\Success'] = 'success';
         }
-
-        $this->response->content->setType('application/json');
     }
 
     public function __invoke()
@@ -95,6 +93,7 @@ abstract class AbstractResponder extends AuraAbstractResponder
         $data = $this->payload->get();
         $this->response->status->set('200');
         $this->response->content->set(json_encode($data));
+        $this->response->content->setType('application/json');
         return $this->response;
     }
 

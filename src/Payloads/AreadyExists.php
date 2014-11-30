@@ -2,7 +2,7 @@
 
 namespace Tarcha\WebKernel\Payloads;
 
-class AlreadyExists implements PayloadInterface
+class AlreadyExists extends AbstractPayload
 {
 
 }

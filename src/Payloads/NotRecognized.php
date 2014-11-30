@@ -2,7 +2,6 @@
 
 namespace Tarcha\WebKernel\Payloads;
 
-class NotRecognized implements PayloadInterface
+class NotRecognized extends AbstractPayload
 {
-
 }

@@ -2,7 +2,7 @@
 
 namespace Tarcha\WebKernel\Payloads;
 
-class Error implements PayloadInterface
+class Error extends AbstractPayload
 {
 
 }

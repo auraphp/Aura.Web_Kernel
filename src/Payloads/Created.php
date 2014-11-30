@@ -2,7 +2,7 @@
 
 namespace Tarcha\WebKernel\Payloads;
 
-class Created implements PayloadInterface
+class Created extends AbstractPayload
 {
 
 }

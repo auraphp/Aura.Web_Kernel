@@ -2,7 +2,7 @@
 
 namespace Tarcha\WebKernel\Payloads;
 
-class NoContent implements PayloadInterface
+class NoContent extends AbstractPayload
 {
 
 }
