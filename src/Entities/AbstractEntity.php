@@ -1,6 +1,7 @@
 <?php
 
 namespace Tarcha\WebKernel\Entities;
+use \JsonSerializable;
 
 abstract class Abstractentity implements JsonSerializable
 {
