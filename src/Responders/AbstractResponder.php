@@ -8,13 +8,21 @@ use Tarcha\WebKernel\Payloads\PayloadInterface;
 abstract class AbstractResponder extends AuraAbstractResponder
 {
 
-    protected $available = array();
+    protected $available = [];
 
     protected $response;
 
     protected $payload;
 
-    protected $payload_method = array();
+    protected $payload_methods = [];
+
+    private $kernel_payload_methods = [
+        'Tarcha\WebKernel\Payload\NoContent' => 'noContent',
+        'Tarcha\WebKernel\Payload\Error' => 'error',
+        'Tarcha\WebKernel\Payload\NotFound' => 'notFound',
+        'Tarcha\WebKernel\Payload\NotRecognized' => 'notRecognized',
+        'Tarcha\WebKernel\Payload\Success' => 'success'
+    ];
 
 
     public function __construct(
@@ -26,24 +34,9 @@ abstract class AbstractResponder extends AuraAbstractResponder
 
     protected function init()
     {
-        if (! isset($this->payload_method['Tarcha\WebKernel\Payload\Json'])) {
-            $this->payload_method['Tarcha\WebKernel\Payload\Json'] = 'json';
-        }
-        if (! isset($this->payload_method['Tarcha\WebKernel\Payload\NoContent'])) {
-            $this->payload_method['Tarcha\WebKernel\Payload\NoContent'] = 'noContent';
-        }
-        if (! isset($this->payload_method['Tarcha\WebKernel\Payload\Error'])) {
-            $this->payload_method['Tarcha\WebKernel\Payload\Error'] = 'error';
-        }
-        if (! isset($this->payload_method['Tarcha\WebKernel\Payload\NotFound'])) {
-            $this->payload_method['Tarcha\WebKernel\Payload\NotFound'] = 'notFound';
-        }
-        if (! isset($this->payload_method['Tarcha\WebKernel\Payload\NotRecognized'])) {
-            $this->payload_method['Tarcha\WebKernel\Payload\NotRecognized'] = 'notRecognized';
-        }
-        if (! isset($this->payload_method['Tarcha\WebKernel\Payload\Success'])) {
-            $this->payload_method['Tarcha\WebKernel\Payload\Success'] = 'success';
-        }
+        // merge payload methods with builtin defaults
+        $this->payload_methods
+            = array_merge($this->kernel_Payload_methods, $this->payload_methods);
     }
 
     public function __invoke()
