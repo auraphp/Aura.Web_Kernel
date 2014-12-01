@@ -8,7 +8,7 @@ abstract class Abstractentity implements JsonSerializable
     /**
      * Remember if any properties have been changed
      */
-    private $isDirty = false;
+    private $isDirty;
 
     /**
      * Construct
@@ -16,6 +16,7 @@ abstract class Abstractentity implements JsonSerializable
     public function __construct($data = array())
     {
         $this->setData($data);
+        $isDirty = false;
     }
 
     /**
@@ -29,8 +30,10 @@ abstract class Abstractentity implements JsonSerializable
     public function setData($data = array())
     {
         foreach ($data as $key => $value) {
-            if (property_exists($this, $key)) {
+            if (property_exists($this, $key)
+                    && $this->key != $value) {
                 $this->$key = $value;
+                $this->isDirty = true;
             }
         }
     }
