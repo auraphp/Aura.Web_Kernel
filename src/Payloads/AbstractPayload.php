@@ -1,5 +1,6 @@
 <?php
-namespace Domain\Payload;
+
+namespace Tarcha\WebKernel\Payloads;
 
 abstract class AbstractPayload implements PayloadInterface
 {
