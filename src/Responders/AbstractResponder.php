@@ -17,11 +17,11 @@ abstract class AbstractResponder extends AuraAbstractResponder
     protected $payload_methods = [];
 
     private $kernel_payload_methods = [
-        'Tarcha\WebKernel\Payload\NoContent' => 'noContent',
-        'Tarcha\WebKernel\Payload\Error' => 'error',
-        'Tarcha\WebKernel\Payload\NotFound' => 'notFound',
+        'Tarcha\WebKernel\Payload\NoContent'     => 'noContent',
+        'Tarcha\WebKernel\Payload\Error'         => 'error',
+        'Tarcha\WebKernel\Payload\NotFound'      => 'notFound',
         'Tarcha\WebKernel\Payload\NotRecognized' => 'notRecognized',
-        'Tarcha\WebKernel\Payload\Success' => 'success'
+        'Tarcha\WebKernel\Payload\Success'       => 'success'
     ];
 
 
