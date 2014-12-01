@@ -7,9 +7,9 @@ use Aura\Di\Container;
 
 class Factory
 {
-    public function __construct(Container $this->di)
+    public function __construct(Container $di)
     {
-        $this->di = $this->di;
+        $this->di = $di;
     }
 
     public function noContent($data)
