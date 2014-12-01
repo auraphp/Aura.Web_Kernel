@@ -14,36 +14,36 @@ class Factory
 
     public function noContent($data)
     {
-        return $this->di->newInstance('Tarcha\WebKernel\Paylaods\NoContent', $data);
+        return $this->di->newInstance('Tarcha\WebKernel\Paylaods\NoContent', [$data]);
     }
 
     public function success($data)
     {
-        return $this->di->newInstance('Tarcha\WebKernel\Paylaods\Success', $data);
+        return $this->di->newInstance('Tarcha\WebKernel\Paylaods\Success', [$data]);
     }
 
     public function error($data)
     {
-        return $this->di->newInstance('Tarcha\WebKernel\Paylaods\Error', $data);
+        return $this->di->newInstance('Tarcha\WebKernel\Paylaods\Error', [$data]);
     }
 
     public function notFound($data)
     {
-        return $this->di->newInstance('Tarcha\WebKernel\Paylaods\NotFound', $data);
+        return $this->di->newInstance('Tarcha\WebKernel\Paylaods\NotFound', [$data]);
     }
 
     public function notRecognized($data)
     {
-        return $this->di->newInstance('Tarcha\WebKernel\Paylaods\NotRecognized', $data);
+        return $this->di->newInstance('Tarcha\WebKernel\Paylaods\NotRecognized', [$data]);
     }
 
     public function created($data)
     {
-        return $this->di->newInstance('Tarcha\WebKernel\Paylaods\Created', $data);
+        return $this->di->newInstance('Tarcha\WebKernel\Paylaods\Created', [$data]);
     }
 
     public function alreadyExists($data)
     {
-        return $this->di->newInstance('Tarcha\WebKernel\Paylaods\AlreadyExists', $data);
+        return $this->di->newInstance('Tarcha\WebKernel\Paylaods\AlreadyExists', [$data]);
     }
 }
