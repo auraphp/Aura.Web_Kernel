@@ -8,7 +8,7 @@ abstract class Abstractentity implements JsonSerializable
     /**
      * Remember if any properties have been changed
      */
-    private $isDirty;
+    private $isDirty = false;
 
     /**
      * Construct
