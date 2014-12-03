@@ -6,6 +6,8 @@ use Tarcha\WebKernel\Filters\Rules;
 
 class AbstractFilter
 {
+    protected $rules;
+    
     public function __construct(Rules $rules)
     {
         $this->rules = $rules;
