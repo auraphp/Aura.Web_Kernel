@@ -27,6 +27,11 @@ class Factory
         return $this->di->newInstance('Tarcha\WebKernel\Payloads\Error', [$data]);
     }
 
+    public function dbError($data)
+    {
+        return $this->di->newInstance('Tarcha\WebKernel\Payloads\DbError', [$data]);
+    }
+
     public function notFound($data)
     {
         return $this->di->newInstance('Tarcha\WebKernel\Payloads\NotFound', [$data]);
