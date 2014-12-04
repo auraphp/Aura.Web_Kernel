@@ -30,8 +30,7 @@ abstract class Abstractentity implements JsonSerializable
     public function setData($data = array())
     {
         foreach ($data as $key => $value) {
-            if (property_exists($this, $key)
-                    && $this->key != $value) {
+            if (property_exists($this, $key) && $this->$key != $value) {
                 $this->$key = $value;
                 $this->isDirty = true;
             }
