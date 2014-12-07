@@ -9,6 +9,9 @@
         "aura/router": "~2.0",
         "aura/web": "~2.0"
     },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "1.*","
+    },
     "autoload": {
         "psr-4": {
             "Tarcha\\WebKernel\\_Config\\": "config/",
