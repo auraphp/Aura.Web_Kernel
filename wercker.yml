@@ -29,4 +29,4 @@ build:
           code: composer test
     after-steps:
         - wantedly/pretty-slack-notify:
-            webhook_url:  
+            webhook_url:  $SLACK_WEBHOOK_URL
