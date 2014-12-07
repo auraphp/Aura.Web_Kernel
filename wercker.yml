@@ -24,6 +24,8 @@ build:
             find . -name '*.json' ! -path '*vendor*' 
             -print0 | xargs -0 -I % 
             sh -c 'echo -n %... ; vendor/bin/jsonlint %'
+      - mbrevda/phpcs:
+          directory: src/
       - script:
           name: phpunit
           code: composer test
