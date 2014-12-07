@@ -10,7 +10,9 @@
         "aura/web": "~2.0"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "1.*","
+        "squizlabs/php_codesniffer": "1.*",
+        "seld/jsonlint": "dev-master",
+        "jakub-onderka/php-parallel-lint": "0.*"
     },
     "autoload": {
         "psr-4": {
