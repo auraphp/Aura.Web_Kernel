@@ -1,0 +1,32 @@
+box: wercker/php
+build:
+    steps:
+      - script:
+          name: echo php information
+          code: |
+            echo "php version $(php --version) running"
+            echo "from location $(which php)"
+            composer --version
+      - script:
+          name: install composer dependencies
+          code: >
+            mkdir -p $WERCKER_CACHE_DIR/.composer/cache;
+            composer config cache-dir $WERCKER_CACHE_DIR/.composer/cache;
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+      - script:
+          name: phplint
+          code: ./vendor/bin/parallel-lint --exclude vendor .
+      - mbrevda/phpcs:
+            directory: src/
+      - script:
+          name: json lint
+          code: >
+            find . -name '*.json' ! -path '*vendor*' 
+            -print0 | xargs -0 -I % 
+            sh -c 'echo -n %... ; vendor/bin/jsonlint %'
+      - script:
+          name: phpunit
+          code: composer test
+    after-steps:
+        - wantedly/pretty-slack-notify:
+            webhook_url:  
