@@ -13,7 +13,8 @@
     "autoload": {
         "psr-4": {
             "Tarcha\\WebKernel\\_Config\\": "config/",
-            "Tarcha\\WebKernel\\": "src/"
+            "Tarcha\\WebKernel\\": "src/",
+            "Tarcha\\WebKernel\\Tests\\": "tests/src/"
         }
     },
     "extra": {
@@ -29,6 +30,6 @@
         }
     },
     "scripts": {
-        "test": "cd tests/kernel; ./phpunit.sh"
+        "test": "tests/phpunit.sh"
     }
 }

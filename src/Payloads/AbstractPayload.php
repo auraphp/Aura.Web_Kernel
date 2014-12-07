@@ -4,7 +4,7 @@ namespace Tarcha\WebKernel\Payloads;
 
 abstract class AbstractPayload implements PayloadInterface
 {
-    protected $payload = array();
+    public $payload = [];
 
     public function __construct($payload)
     {

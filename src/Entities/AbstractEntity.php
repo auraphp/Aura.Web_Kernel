@@ -1,7 +1,9 @@
 <?php
 
 namespace Tarcha\WebKernel\Entities;
+
 use \JsonSerializable;
+use \ReflectionClass;
 
 abstract class Abstractentity implements JsonSerializable
 {
@@ -10,13 +12,15 @@ abstract class Abstractentity implements JsonSerializable
      */
     private $isDirty = false;
 
+    protected $properties = [];
+
     /**
      * Construct
      */
-    public function __construct($data = array())
+    public function __construct($data = [])
     {
         $this->setData($data);
-        $isDirty = false;
+        $this->isDirty = false;
     }
 
     /**
@@ -27,13 +31,10 @@ abstract class Abstractentity implements JsonSerializable
      * @param array $data an array of data to set
      *
      */
-    public function setData($data = array())
+    public function setData($data = [])
     {
         foreach ($data as $key => $value) {
-            if (property_exists($this, $key) && $this->$key != $value) {
-                $this->$key = $value;
-                $this->isDirty = true;
-            }
+            $this->__set($key, $value);
         }
     }
 
@@ -57,10 +58,13 @@ abstract class Abstractentity implements JsonSerializable
     /**
      * setter to access private paroperties
      */
-    public function __set($name, $val)
+    public function __set($key, $val)
     {
-        $this->name = $val;
-        $this->isDirty = true;
+
+        if ($this->protectedPropertyExists($this, $key) && $this->$key != $val) {
+            $this->$key = $val;
+            $this->isDirty = true;
+        }
     }
 
     /**
@@ -77,5 +81,25 @@ abstract class Abstractentity implements JsonSerializable
     public function jsonSerialize()
     {
         return $this->getData();
+    }
+
+    /**
+     * Check if a property exists, even if its protected
+     *
+     * @param object $obj the contest in which to look
+     * @param mixed $key the key name
+     *
+     * @return bool if ket was found
+     *
+     */
+    private function protectedPropertyExists($obj, $key)
+    {
+        $reflection = new ReflectionClass($obj);
+
+        if (!$reflection->hasProperty($key)) {
+            return false;
+        }
+
+        return $reflection->getProperty($key)->isProtected();
     }
 }
