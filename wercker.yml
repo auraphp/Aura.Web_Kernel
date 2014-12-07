@@ -28,7 +28,7 @@ build:
           directory: src/
       - script:
           name: phpunit
-          code: composer test
+          code: ./tests/phpunit.sh
     after-steps:
         - wantedly/pretty-slack-notify:
             webhook_url:  $SLACK_WEBHOOK_URL
