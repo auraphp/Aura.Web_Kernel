@@ -4,7 +4,6 @@ namespace Tarcha\WebKernel\Payloads;
 
 use Aura\Di\Container;
 
-
 class Factory
 {
     public function __construct(Container $di)

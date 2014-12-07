@@ -21,7 +21,8 @@ abstract class AbstractResponder extends AuraAbstractResponder
         'Tarcha\WebKernel\Payload\Error'         => 'error',
         'Tarcha\WebKernel\Payload\NotFound'      => 'notFound',
         'Tarcha\WebKernel\Payload\NotRecognized' => 'notRecognized',
-        'Tarcha\WebKernel\Payload\Success'       => 'success'
+        'Tarcha\WebKernel\Payload\Success'       => 'success',
+        'Tarcha\WebKernel\Payload\AlreadExists'  => 'alreadyExists'
     ];
 
 
@@ -105,7 +106,7 @@ abstract class AbstractResponder extends AuraAbstractResponder
         return $this->response;
     }
 
-    protected function AlreadyExists()
+    protected function alreadyExists()
     {
         $data = $this->payload->get('exception');
         $this->response->status->set('422');

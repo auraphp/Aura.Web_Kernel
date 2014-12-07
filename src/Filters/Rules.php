@@ -10,15 +10,15 @@ class Rules extends RuleCollection
     public function __construct(RuleLocator $locator)
     {
          parent::__construct($locator);
-         
+
          addCustomRules();
     }
-    
+
     public function addCustomRules()
     {
         //TO ADD IF NEEDED
     }
-    
+
     public function unsetRules()
     {
         $this->rules = [];
