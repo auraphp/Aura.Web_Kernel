@@ -12,8 +12,6 @@ abstract class Abstractentity implements JsonSerializable
      */
     private $isDirty = false;
 
-    protected $properties = [];
-
     /**
      * Construct
      */
@@ -44,6 +42,8 @@ abstract class Abstractentity implements JsonSerializable
     public function getData()
     {
         $properties = get_object_vars($this);
+        unset($properties['isDirty']);
+        
         return $properties;
     }
 
