@@ -50,4 +50,9 @@ class Factory
     {
         return $this->di->newInstance('Tarcha\WebKernel\Payloads\AlreadyExists', [$data]);
     }
+
+    public function invalid($data)
+    {
+        return $this->di->newInstance('Tarcha\WebKernel\Payloads\Invalid', [$data]);
+    }
 }

@@ -2,60 +2,57 @@
 
 namespace Tarcha\WebKernel\Filters;
 
-use Tarcha\WebKernel\Filters\Rules;
+use Aura\Filter\RuleCollection;
+use Aura\Filter\RuleLocator;
 
-class AbstractFilter
+class AbstractFilter extends RuleCollection
 {
-    protected $rules;
-
-    public function __construct(Rules $rules)
-    {
-        $this->rules = $rules;
-    }
+    private $data;
 
     public function id($field, $val)
     {
-        $this->rules->unsetRules();
+        $this
+            ->addSoftRule($field, self::IS, 'int')
+            ->addSoftRule($field, self::IS_NOT, 'max', 0);
 
-        $this->rules->addStopRule($field, $valid::IS, 'int')
-            ->addStopRule($field, $valid::IS_NOT, 'max', 0);
-
-        $data = [$field => $val];
-        $success = $rules->values($data);
-        return $success;
+        $this->data[$field] = $val;
     }
 
     public function string($field, $val)
     {
-        $this->rules->unsetRules();
+        $this->addSoftRule($field, self::IS, 'alpha');
 
-        $this->rules->addStopRule($item, $valid::IS, 'alpha');
-
-        $data = [$field => $val];
-        $success = $rules->values($data);
-        return $success;
+        $this->data[$field] = $val;
     }
 
     public function int($field, $val)
     {
-        $this->rules->unsetRules();
+        $this->addSoftRule($field, self::IS, 'int');
 
-        $this->rules->addStopRule($field, $valid::IS, 'int');
-
-        $data = [$field => $val];
-        $success = $rules->values($data);
-        return $success;
+        $this->data[$field] = $val;
     }
 
     public function time($field, $val)
     {
-        $this->rules->unsetRules();
+        $this
+            ->addSoftRule($field, self::IS, 'number')
+            ->addSoftRule($field, self::IS_NOT, 'max', 0);
 
-        $this->rules->addStopRule($item, $valid::IS, 'number')
-            ->addStopRule($item, $valid::IS_NOT, 'max', 0);
+        $this->addData($field, $val);
+    }
 
-        $data = [$field => $val];
-        $success = $rules->values($data);
-        return $success;
+    public function addData($field, $val)
+    {
+        $this->data[$field] = $val;
+    }
+
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    public function getValues()
+    {
+        return $this->values($this->data);
     }
 }

@@ -7,7 +7,8 @@
         "aura/web-kernel": "~2.0",
         "aura/dispatcher": "~2.0",
         "aura/router": "~2.0",
-        "aura/web": "~2.0"
+        "aura/web": "~2.0",
+        "aura/filter": "~2.0@dev"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "1.*",
