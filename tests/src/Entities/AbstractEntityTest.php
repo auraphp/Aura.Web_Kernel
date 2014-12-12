@@ -1,8 +1,10 @@
 <?php
 
-namespace Tarcha\WebKernel\Tests;
+namespace Tarcha\WebKernel\Tests\Entities;
 
-class AbstractEntityTest extends \PHPUnit_Framework_TestCase
+use Tarcha\WebKernel\Tests\Test;
+
+class AbstractEntityTest extends Test
 {
     public function getPayload($args)
     {

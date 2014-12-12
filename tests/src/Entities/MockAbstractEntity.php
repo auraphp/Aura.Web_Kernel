@@ -1,6 +1,6 @@
 <?php
 
-namespace Tarcha\WebKernel\Tests;
+namespace Tarcha\WebKernel\Tests\Entities;
 
 use Tarcha\WebKernel\Entities\AbstractEntity;
 

@@ -1,7 +1,10 @@
 <?php
-namespace Tarcha\WebKernel\Tests;
 
-class AbstractPayloadTest extends \PHPUnit_Framework_TestCase
+namespace Tarcha\WebKernel\Tests\Payloads;
+
+use Tarcha\WebKernel\Tests\Test;
+
+class AbstractPayloadTest extends Test
 {
     public function getPayload($args = [])
     {
