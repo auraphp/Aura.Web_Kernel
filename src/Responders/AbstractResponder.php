@@ -37,7 +37,7 @@ abstract class AbstractResponder extends AuraAbstractResponder
     {
         // merge payload methods with builtin defaults
         $this->payload_methods
-            = array_merge($this->kernel_Payload_methods, $this->payload_methods);
+            = array_merge($this->kernel_payload_methods, $this->payload_methods);
     }
 
     public function __invoke()
