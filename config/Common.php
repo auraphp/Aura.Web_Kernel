@@ -1,16 +1,14 @@
 <?php
+
 namespace Tarcha\WebKernel\_Config;
 
-use Aura\Web_Kernel\_Config\Common as AuraConfig;
 use Aura\Di\Config;
 use Aura\Di\Container;
 
-class Common extends AuraConfig
+class Common extends Config
 {
     public function define(Container $di)
     {
-        parent::define($di);
-
         $di->types['Aura\Web\Request'] = $di->lazyGet('aura/web-kernel:request');
         $di->types['Aura\Web\Response'] = $di->lazyGet('aura/web-kernel:response');
         $di->types['Aura\Router\Router'] = $di->lazyGet('aura/web-kernel:router');
@@ -28,7 +26,6 @@ class Common extends AuraConfig
 
     public function modify(Container $di)
     {
-        parent::modify($di);
 
     }
 }
