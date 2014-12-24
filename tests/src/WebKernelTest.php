@@ -16,11 +16,14 @@ class WebKernelTest extends \PHPUnit_Framework_TestCase
     protected function index()
     {
         $_SERVER['HTTP_HOST'] = 'example.com';
-        $web_kernel = (new Factory)->newKernel(
-            dirname(__DIR__),
-            'Aura\Web_Kernel\WebKernel',
-            ContainerBuilder::DISABLE_AUTO_RESOLVE
+
+        $di = (new Factory)->newContainer(
+            __DIR__,
+            'web-kernel-test',
+            dirname(dirname(__DIR__)) . '/composer.json',
+            dirname(dirname(__DIR__)) . '/vendor/composer/installed.json'
         );
+        $web_kernel = $di->newInstance('Aura\Web_Kernel\WebKernel');
         $web_kernel();
         return $web_kernel;
     }
