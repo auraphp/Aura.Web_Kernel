@@ -85,7 +85,7 @@ class WebKernelRouter
         if ($route) {
             $this->request->params->set($route->params);
         } else {
-            $this->logger->debug(__CLASS__ . ' missing route ' . $path);
+            $this->logger->debug(__CLASS__ . ' missing route');
             $this->request->params['action'] = 'aura.web_kernel.missing_route';
         }
     }
