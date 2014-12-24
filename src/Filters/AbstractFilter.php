@@ -18,9 +18,9 @@ class AbstractFilter extends RuleCollection
         $this->data[$field] = $val;
     }
 
-    public function noId($field, $val)
+    public function blank($field, $val)
     {
-        $this->addSoftRule('Id', self::IS, 'blank');
+        $this->addSoftRule($field, self::IS, 'blank');
         
         $this->data[$field] = $val;
     }
