@@ -8,3 +8,5 @@ cache:
   directories:
     - $HOME/.composer/cache
 script: tests/phpunit.sh
+notifications:
+  irc: "irc.freenode.org#auraphp"
