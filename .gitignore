@@ -1,3 +1,1 @@
-tests/kernel/vendor
-tests/kernel/composer.lock
-vendor
+vendor/
