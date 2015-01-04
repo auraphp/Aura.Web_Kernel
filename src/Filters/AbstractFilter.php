@@ -2,64 +2,82 @@
 
 namespace Tarcha\WebKernel\Filters;
 
-use Aura\Filter\RuleCollection;
-use Aura\Filter\RuleLocator;
+use Aura\Filter\FilterFactory;
 
-class AbstractFilter extends RuleCollection
+class AbstractFilter
 {
-    private $data;
-
-    public function id($field, $val)
+    public function __construct(FilterFactory $factory)
     {
-        $this
-            ->addSoftRule($field, self::IS, 'int')
-            ->addSoftRule($field, self::IS_NOT, 'max', 0);
-
-        $this->data[$field] = $val;
-    }
-
-    public function blank($field, $val)
-    {
-        $this->addSoftRule($field, self::IS, 'blank');
-        
-        $this->data[$field] = $val;
+        $this->factory = $factory;
+        $this->filter = $factory->newInstance();
     }
     
-    public function string($field, $val)
+    public function addId($field)
     {
-        $this->addSoftRule($field, self::IS, 'alpha');
-
-        $this->data[$field] = $val;
+        $this->filter
+            ->validate($field)
+            ->is('int')
+            ->asSoftRule();
+            
+        $this->filter
+            ->validate($field)
+            ->isNot('max', 0)
+            ->asSoftRule();
     }
-
-    public function int($field, $val)
+    
+    public function addBlank($field)
     {
-        $this->addSoftRule($field, self::IS, 'int');
-
-        $this->data[$field] = $val;
+        $this->filter
+            ->validate($field)
+            ->is('blank')
+            ->asSoftRule();
     }
-
-    public function time($field, $val)
+    
+    public function addString($field)
     {
-        $this
-            ->addSoftRule($field, self::IS, 'number')
-            ->addSoftRule($field, self::IS_NOT, 'max', 0);
-
-        $this->addData($field, $val);
+        $this->filter
+            ->validate($field)
+            ->is('alpha')
+            ->asSoftRule();
     }
-
-    public function addData($field, $val)
+    
+    public function addInt($field)
     {
-        $this->data[$field] = $val;
+        $this->filter
+            ->validate($field)
+            ->is('int')
+            ->asSoftRule();
     }
-
-    public function getData()
+    
+    public function addFloat($field)
     {
-        return $this->data;
+        $this->filter
+            ->validate($field)
+            ->is('float')
+            ->asSoftRule();
     }
-
-    public function getValues()
+    
+    public function addTime($field)
     {
-        return $this->values($this->data);
+        $this->filter
+            ->validate($field)
+            ->is('int')
+            ->asSoftRule();
+            
+        $this->filter
+            ->validate($field)
+            ->isNot('max', 0)
+            ->asSoftRule();
+    }
+    
+    public function validate($values)
+    {
+        return $this->filter->apply($values);
+    }
+    
+    public function newFilter()
+    {
+        $this->filter = $this->factory->newInstance();
+        return $this->filter;
     }
 }
