@@ -6,9 +6,9 @@ This is a kernel for the [Aura.Web_Project](https://github.com/auraphp/Aura.Web_
 
 ### Requirements
 
-This kernel requires PHP 5.4 or later. Unlike Aura library packages, this
-kernel package has userland dependencies, which themselves may have other
-dependencies:
+This kernel requires PHP 5.4 or later; we recommend using the latest available version of PHP as a matter of principle.
+
+Unlike Aura library packages, this kernel package has userland dependencies, which themselves may have other dependencies:
 
 - [aura/project-kernel](https://packagist.org/packages/aura/project-kernel)
 - [aura/dispatcher](https://packagist.org/packages/aura/dispatcher)
@@ -32,9 +32,8 @@ _autoload.php_ file.
 
 [![Build Status](https://travis-ci.org/auraphp/Aura.Web_Kernel.png?branch=develop-2)](https://travis-ci.org/auraphp/Aura.Web_Kernel)
 
-This kernel has 100% code coverage with [PHPUnit](http://phpunit.de). To run
-the tests at the command line, go to the `tests/kernel/` directory and issue
-`./phpunit.sh`.
+To run the unit tests at the command line, issue `composer install` and then `phpunit` at the package root. This requires [Composer](http://getcomposer.org/) to be available as `composer`, and [PHPUnit](http://phpunit.de/) to be available as `phpunit`.
+
 
 ### PSR Compliance
 

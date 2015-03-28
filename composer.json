@@ -38,5 +38,12 @@
         "branch-alias": {
             "dev-develop-2": "2.0.x-dev"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Aura\\Web_Kernel\\": "tests/",
+            "Aura\\Di\\": "vendor/aura/di/tests/",
+            "Aura\\Web\\": "vendor/aura/web/tests/"
+        }
     }
 }
