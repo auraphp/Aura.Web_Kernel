@@ -3,8 +3,6 @@
  *
  * This file is part of Aura for PHP.
  *
- * @package Aura.Web_Kernel
- *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
  */
@@ -137,7 +135,7 @@ class WebKernelDispatcher
      *
      * Caught an exception while dispatching.
      *
-     * @param Exception $exception The caught exception.
+     * @param Exception $e The caught exception.
      *
      * @return null
      *

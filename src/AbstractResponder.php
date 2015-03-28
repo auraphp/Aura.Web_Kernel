@@ -3,8 +3,6 @@
  *
  * This file is part of Aura for PHP.
  *
- * @package Aura.Web_Kernel
- *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
  */
@@ -46,9 +44,7 @@ abstract class AbstractResponder
      *
      * Constructor.
      *
-     * @param Request $request A web request object.
-     *
-     * @param Responder $responder A responder object.
+     * @param Response $response A web response object.
      *
      */
     public function __construct(Response $response)
@@ -79,6 +75,13 @@ abstract class AbstractResponder
      */
     abstract public function __invoke();
 
+    /**
+     *
+     * Exports the params in an easier-to-read format, especially for objects.
+     *
+     * @param array $params
+     *
+     */
     protected function exportParams($params)
     {
         if (! $params) {
@@ -96,5 +99,4 @@ abstract class AbstractResponder
         }
         return 'array (' . PHP_EOL . implode(PHP_EOL, $export) . PHP_EOL . ')';
     }
-
 }
