@@ -1,4 +1,1 @@
-- CHG: Update config to work without auto-resolve.
-
-- TST: Disable auto-resolve for testing, and mimic web-project index more
-  accurately
+This release adds a nicer-looking export-params so if we examine an object we don't get a massive, hard-to-read export. It also modifies the testing structure and updates other support files.
