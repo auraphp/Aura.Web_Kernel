@@ -34,9 +34,6 @@
                 "common": "Aura\\Web_Kernel\\_Config\\Common",
                 "web-kernel-test": "Aura\\Web_Kernel\\_Config\\WebKernelTest"
             }
-        },
-        "branch-alias": {
-            "dev-develop-2": "2.0.x-dev"
         }
     },
     "autoload-dev": {
