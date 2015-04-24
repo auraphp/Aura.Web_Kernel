@@ -116,7 +116,16 @@ class WebKernelRouter
         if ($pos !== false) {
             $path = substr($path, $pos + 10);
             $path = '/' . ltrim($path, '/');
+        } else {
+            $scriptName = isset($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : null;
+            if (null !== $scriptName) {
+                $scriptDir = dirname($scriptName);
+                if (strpos($path, $scriptDir) === 0) {
+                    $path = substr($path, strlen($scriptDir));
+                }
+            }
         }
+
         return $path;
     }
 
