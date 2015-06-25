@@ -79,7 +79,11 @@ class WebKernelDispatcher
      */
     public function __invoke()
     {
-        $action = $this->request->params->get('action');
+        $objectParam = $this->dispatcher->getObjectParam();
+        if (!$objectParam) {
+            $objectParam = 'action';
+        }
+        $action = $this->request->params->get($objectParam);
         $this->logControllerValue($action);
         $this->checkForMissingController($action);
         try {
