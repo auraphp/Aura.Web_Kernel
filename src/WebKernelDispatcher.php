@@ -80,7 +80,7 @@ class WebKernelDispatcher
     public function __invoke()
     {
         $object_param = $this->dispatcher->getObjectParam();
-        if ( ! $object_param) {
+        if (! $object_param) {
             $object_param = 'action';
         }
         $action = $this->request->params->get($object_param);
