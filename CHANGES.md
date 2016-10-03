@@ -1,1 +1,6 @@
-This release adds more explicit logging when no route is found for a path.
+This is primarily a hygiene release, with one minor bugfix.
+
+- (HYG) Update license year and remove branch alias.
+- (HYG) Improve PSR-2 compliance.
+- (HYG) Update Travis configurations.
+- (FIX) In WebKernelDispatcher::__invoke, use Dispatcher::getObjectParam
