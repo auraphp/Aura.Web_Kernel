@@ -21,6 +21,9 @@
         "aura/router": "~2.0",
         "aura/web": "~2.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "~7"
+    },
     "autoload": {
         "psr-4": {
             "Aura\\Web_Kernel\\": "src/",
@@ -42,5 +45,14 @@
             "Aura\\Di\\": "vendor/aura/di/tests/",
             "Aura\\Web\\": "vendor/aura/web/tests/"
         }
+    },
+    "scripts": {
+        "test": [
+            "@composer install",
+            "./vendor/bin/phpunit"
+	]
+    },
+    "scripts-descriptions": {
+        "test": "Run unit tests"
     }
 }
